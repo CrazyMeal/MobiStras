@@ -1,7 +1,11 @@
 package com.crazymeal.mobistras;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.NetworkInfo.State;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.view.Menu;
 
 public class MainActivity extends Activity {
@@ -19,4 +23,16 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+	public boolean isConnected(Activity activity) 
+    {
+      ConnectivityManager connectivityManager = (ConnectivityManager)  activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+      NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+      if (networkInfo != null) 
+      {
+        State networkState = networkInfo.getState();
+        if (networkState.compareTo(State.CONNECTED) == 0) 
+          return true;
+      }
+      return false;
+    }
 }
