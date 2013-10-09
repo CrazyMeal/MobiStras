@@ -4,5 +4,8 @@
     <string name="app_name">MobiStras</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="text_find_button">Trouver</string>
+    <string name="text_button_list">Liste</string>
+    <string name="text_button_preferences">Préférences</string>
 
 </resources>
