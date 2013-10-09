@@ -15,7 +15,7 @@ public class MainService extends Service{
 	@Override
 	public IBinder onBind(Intent arg0) {
 		// TODO Auto-generated method stub
-		Toast.makeText(getApplicationContext(), "binding", Toast.LENGTH_SHORT).show();
+		Toast.makeText(getApplicationContext(), "Bienvenue", Toast.LENGTH_SHORT).show();
 		return mMessenger.getBinder();
 	}
 
