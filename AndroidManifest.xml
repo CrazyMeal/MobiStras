@@ -31,6 +31,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity android:name="com.crazymeal.mobistras.ParkingListActivity"></activity>
+        
         <service android:name="com.crazymeal.mobistras.MainService"/>
     </application>
 	

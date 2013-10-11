@@ -14,13 +14,17 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 public class MainActivity extends Activity {
 
 	private Messenger mService = null;
 	private boolean mBound;
 	private SharedPreferences myPrefs;
-	
+	private Button listButton;
+	private static final int CODE_DE_MON_ACTIVITE = 2;
 	
 	private ServiceConnection mConnection = new ServiceConnection() {
 		public void onServiceConnected(ComponentName className, IBinder service) {
@@ -44,6 +48,15 @@ public class MainActivity extends Activity {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		this.listButton = (Button) findViewById(R.id.button_list);
+		
+		this.listButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this, ParkingListActivity.class);
+				startActivity(intent);
+			}
+		});
 	}
 
 	@Override
@@ -112,5 +125,13 @@ public class MainActivity extends Activity {
 
 	public void setMyPrefs(SharedPreferences myPrefs) {
 		this.myPrefs = myPrefs;
+	}
+
+	public Button getListButton() {
+		return listButton;
+	}
+
+	public void setListButton(Button listButton) {
+		this.listButton = listButton;
 	}
 }

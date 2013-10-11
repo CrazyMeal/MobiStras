@@ -7,5 +7,6 @@
     <string name="text_find_button">Trouver</string>
     <string name="text_button_list">Liste</string>
     <string name="text_button_preferences">Préférences</string>
+    <string name="description_image_parking_open">Image parking ouvert</string>
 
 </resources>
