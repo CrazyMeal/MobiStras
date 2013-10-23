@@ -47,6 +47,15 @@ public class ParkingManager {
 		
 		return sortedList;
 	}
+	public ArrayList<HashMap<Integer,Parking>> getArrayParkingList(){
+		ArrayList<HashMap<Integer,Parking>> list = new ArrayList<HashMap<Integer,Parking>>();
+		for(int i = 0; i < this.getParkingList().size(); i++){
+			HashMap<Integer,Parking> map = new HashMap<Integer,Parking>();
+			map.put(this.getParkingList().get(i).getId(),this.getParkingList().get(i));
+			list.add(map);
+		}
+		return list;
+	}
 	public List<Parking> getParkingByStatus(String status){
 		List<Parking> list = new ArrayList<Parking>();
 		for(int i=1; i<this.getParkingList().size(); i++){

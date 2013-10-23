@@ -1,18 +1,18 @@
 package com.crazymeal.mobistras;
 
 
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.NetworkInfo.State;
-import android.os.Bundle;
-import android.os.IBinder;
-import android.os.Messenger;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.NetworkInfo.State;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.Messenger;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,7 +24,6 @@ public class MainActivity extends Activity {
 	private boolean mBound;
 	private SharedPreferences myPrefs;
 	private Button listButton;
-	private static final int CODE_DE_MON_ACTIVITE = 2;
 	
 	private ServiceConnection mConnection = new ServiceConnection() {
 		public void onServiceConnected(ComponentName className, IBinder service) {
@@ -44,7 +43,8 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		try {
-			startService(new Intent(MainActivity.this, MainService.class));
+			Intent intent = new Intent(MainActivity.this, MainService.class);
+			startService(intent);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -52,7 +52,7 @@ public class MainActivity extends Activity {
 		this.listButton = (Button) findViewById(R.id.button_list);
 		
 		this.listButton.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
+			public void onClick(View v) {				
 				Intent intent = new Intent(MainActivity.this, ParkingListActivity.class);
 				startActivity(intent);
 			}
@@ -61,7 +61,6 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		this.getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
@@ -102,7 +101,7 @@ public class MainActivity extends Activity {
       }
       return false;
     }
-
+	
 	public Messenger getmService() {
 		return mService;
 	}

@@ -1,16 +1,26 @@
 package com.crazymeal.mobistras;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import description.Parking;
+import manager.ParkingManager;
+import core.LocationParser;
+import core.ParkingDataParser;
 
 import android.app.Activity;
-import android.app.ListActivity;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.NetworkInfo.State;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.widget.ListView;
+import description.Parking;
 
 public class ParkingListActivity extends Activity{
 	private ArrayList<HashMap<Integer,Parking>> parkingList;
@@ -21,36 +31,50 @@ public class ParkingListActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list);
-		this.parkingList = new ArrayList<HashMap<Integer,Parking>>();
-		this.listView = (ListView) findViewById(R.id.listviewperso);
 		
-		fillParkingList();
+		ParkingDataParser pdp = new ParkingDataParser(); 
+		LocationParser lp = new LocationParser();
+		ParkingManager pm = new ParkingManager();
+		
+		pdp.execute(connectParser(pdp));
+		//pdp.setUrl("http://carto.strasmap.eu/remote.amf.json/Parking.status");
+		//pdp.execute();
+		
+		lp.setUrl("http://carto.strasmap.eu/remote.amf.json/Parking.geometry");
+		lp.execute();
+		
+		pm.buildList(pdp);
+		pm.merge(lp);
+		
+		this.parkingList = pm.getArrayParkingList();
+		this.listView = (ListView) findViewById(R.id.listviewperso);
+
 		adapter = new ParkingAdapter(this, R.layout.list_item_display,this.parkingList);
 		this.listView.setAdapter(adapter);
-		
-		/*
-		viewParts = new Runnable(){
-			public void run(){
-				handler.sendEmptyMessage(0);
-			}
-		};
-		
-		Thread thread = new Thread(null, viewParts,"MagentoBackground");
-		thread.start();
-		*/
+	
 	}
-	
-	/*
-	private Handler handler = new Handler(){
-		public void handleMessage(Message msg){
-			fillParkingList();
-			adapter = new ParkingAdapter(ParkingListActivity.this, R.layout.list_item_display,parkingList);
-			
-			listView.setAdapter(adapter);
+	public InputStream connectParser(ParkingDataParser pdp){
+		URL url;
+		InputStream in = null;
+		try{		
+			url = new URL("http://carto.strasmap.eu/remote.amf.json/Parking.status");
+				
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			connection.setDoInput(true);
+			connection.setDoOutput(true);
+			connection.setReadTimeout(10000);
+			connection.setRequestMethod("GET");
+			connection.connect();
+			in = connection.getInputStream();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (ProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-	};
-	*/
-	
+		return in;
+	}
 	public ArrayList<HashMap<Integer,Parking>> getParkingList() {
 		return parkingList;
 	}
@@ -70,7 +94,7 @@ public class ParkingListActivity extends Activity{
 		this.adapter = adapter;
 	}
 	
-	
+	/*
 	private void fillParkingList(){
 		Parking parking1 = new Parking();
 		Parking parking2 = new Parking();
@@ -92,4 +116,5 @@ public class ParkingListActivity extends Activity{
 		this.getParkingList().add(map1);
 		this.getParkingList().add(map2);
 	}
+	*/
 }

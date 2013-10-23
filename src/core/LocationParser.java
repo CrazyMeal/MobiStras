@@ -2,11 +2,12 @@ package core;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -22,16 +23,20 @@ public class LocationParser {
 
 	public void extract(){
 		try {
-			URLConnection connection = this.getUrl().openConnection();
-			InputStreamReader isr = new InputStreamReader(connection.getInputStream());
-			BufferedReader br = new BufferedReader(isr);
+			HttpURLConnection connection = (HttpURLConnection) this.getUrl().openConnection();
+			connection.setDoInput(true);
+			connection.setDoOutput(true);
+			connection.setReadTimeout(10000);
+			connection.setRequestMethod("GET");
+			connection.connect();
+			InputStream in = connection.getInputStream();
+			
+			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 			String inputLine;
-			while((inputLine=br.readLine()) != null){
+			while((inputLine=reader.readLine()) != null){
 				extractedData.append(inputLine);
 				System.out.println(inputLine);
 			}
-			br.close();
-			isr.close();
 		}
 		catch (IOException e) {
 			e.printStackTrace();

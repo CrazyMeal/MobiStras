@@ -14,20 +14,25 @@
 	   	android:padding="10dp"/>
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_vertical"
-	   	android:paddingLeft="10dp"
-	    android:layout_weight="1" >
-		
-        <TextView android:id="@+id/list_item_parking_name"
-	         android:layout_width="fill_parent"
-	         android:layout_height="fill_parent"
-	         android:textSize="16sp"
-	         android:textStyle="bold"
-	         />
-	    
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_horizontal" >
+
+        <TextView
+            android:id="@+id/list_item_parking_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/list_item_avaibleplaces"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:layout_weight="1" />
+
     </LinearLayout>
 
 </LinearLayout>
