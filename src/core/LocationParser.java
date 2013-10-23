@@ -43,11 +43,11 @@ public class LocationParser {
 		}
 	}
 	
-	public void parse(){
+	public void parse(String stringToParse){
 		ArrayList<HashMap<String,String>> parkingList = new ArrayList<HashMap<String,String>>();
 		try {
 			
-			String dataToParse = extractedData.toString();
+			String dataToParse = stringToParse.toString();
 			dataToParse = dataToParse.replace("\"d\":[],\"s\":[{","");
 			dataToParse = dataToParse.replaceAll("\"go\":","");
 			
@@ -89,9 +89,9 @@ public class LocationParser {
 		
 		this.setParkingList(parkingList);
 	}
-	public void execute(){
-		this.extract();
-		this.parse();
+	public void execute(String stringToParse){
+		//this.extract();
+		this.parse(stringToParse);
 	}
 	public String toString(){
 		StringBuffer sb = new StringBuffer();

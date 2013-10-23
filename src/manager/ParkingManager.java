@@ -49,7 +49,11 @@ public class ParkingManager {
 	}
 	public ArrayList<HashMap<Integer,Parking>> getArrayParkingList(){
 		ArrayList<HashMap<Integer,Parking>> list = new ArrayList<HashMap<Integer,Parking>>();
+<<<<<<< HEAD
 		for(int i = 0; i < this.getParkingList().size(); i++){
+=======
+		for(int i = 1; i < this.getParkingList().size(); i++){
+>>>>>>> Finish list + refactoring
 			HashMap<Integer,Parking> map = new HashMap<Integer,Parking>();
 			map.put(this.getParkingList().get(i).getId(),this.getParkingList().get(i));
 			list.add(map);

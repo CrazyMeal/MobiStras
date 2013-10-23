@@ -43,11 +43,11 @@ public class ParkingDataParser {
 		}
 	}
 	
-	public void parse(){
+	public void parse(String stringToParse){
 		ArrayList<HashMap<String,String>> parkingList = new ArrayList<HashMap<String,String>>();
 		try {
 			
-			String dataToParse = extractedData.toString();
+			String dataToParse = stringToParse.toString();
 			dataToParse = dataToParse.replace("\"d\":[],\"s\":[{","");
 			
 			String[] buffer = dataToParse.split("\\},\\{");
@@ -86,9 +86,15 @@ public class ParkingDataParser {
 		}
 		this.setParkingList(parkingList);
 	}
+<<<<<<< HEAD
 	public void execute(InputStream in){
 		this.extract(in);
 		this.parse();
+=======
+	public void execute(String stringToParse){
+		//this.extract(in);
+		this.parse(stringToParse);
+>>>>>>> Finish list + refactoring
 	}
 	public String toString(){
 		StringBuffer sb = new StringBuffer();
