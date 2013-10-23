@@ -86,15 +86,10 @@ public class ParkingDataParser {
 		}
 		this.setParkingList(parkingList);
 	}
-<<<<<<< HEAD
-	public void execute(InputStream in){
-		this.extract(in);
-		this.parse();
-=======
+
 	public void execute(String stringToParse){
 		//this.extract(in);
 		this.parse(stringToParse);
->>>>>>> Finish list + refactoring
 	}
 	public String toString(){
 		StringBuffer sb = new StringBuffer();

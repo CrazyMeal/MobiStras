@@ -36,11 +36,7 @@ public class ParkingAdapter extends ArrayAdapter<HashMap<Integer,Parking>>{
 				parkingName.setText(parking.getName());
 			}
 			if(avaiblePlaces != null){
-<<<<<<< HEAD
-				avaiblePlaces.setText(String.valueOf(parking.getAvaiblePlaces()));
-=======
 				avaiblePlaces.setText(String.valueOf(parking.getAvaiblePlaces()+" / "+parking.getFullPlaces()));
->>>>>>> Finish list + refactoring
 			}
 		}
 		return view;
