@@ -1,4 +1,4 @@
-package parsers;
+package com.crazymeal.parsers;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.HashMap;
 
-import model.Parking;
+import com.crazymeal.model.Parking;
 
 public abstract class JsonParser {
 	protected URL urlToParse;

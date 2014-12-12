@@ -1,4 +1,4 @@
-package asynctasks;
+package com.crazymeal.asynctasks;
 
 import java.io.BufferedReader;
 import java.io.IOException;

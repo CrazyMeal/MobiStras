@@ -3,9 +3,11 @@ package util;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import model.Parking;
-
 import org.json.simple.JSONArray;
+
+import android.util.SparseArray;
+
+import com.crazymeal.model.Parking;
 
 public class Util {
 	
