@@ -12,6 +12,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 
 public class SplashActivity extends Activity {
+	
 	private static final int STOPSPLASH = 0;
 	private static final long SPLASHTIME = 2000;
 
@@ -58,4 +59,5 @@ public class SplashActivity extends Activity {
 		msg.what = STOPSPLASH;
 		splashHandler.sendMessageDelayed(msg, SPLASHTIME);
 	}
+	
 }
