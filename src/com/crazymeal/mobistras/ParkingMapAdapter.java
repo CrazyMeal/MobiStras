@@ -3,20 +3,26 @@ package com.crazymeal.mobistras;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.crazymeal.model.Parking;
+import com.crazymeal.model.Status;
 
 public class ParkingMapAdapter extends ArrayAdapter<com.crazymeal.model.Parking>{
 	private ArrayList<com.crazymeal.model.Parking> parkingList;
+	private Resources resources;
 	
-	public ParkingMapAdapter(Context context, int textViewRessourceId, ArrayList<com.crazymeal.model.Parking> parkingList){
+	public ParkingMapAdapter(Context context, Resources resources, int textViewRessourceId, ArrayList<com.crazymeal.model.Parking> parkingList){
 		super(context, textViewRessourceId, parkingList);
 		this.parkingList = parkingList;
+		this.resources = resources;
 	}
 	
 	public View getView(int position, View convertView, ViewGroup parentView){
@@ -37,6 +43,10 @@ public class ParkingMapAdapter extends ArrayAdapter<com.crazymeal.model.Parking>
 			}
 			if(avaiblePlaces != null){
 				avaiblePlaces.setText(String.valueOf(parking.getAvaiblePlaces()+" / "+parking.getFullPlaces()));
+			}
+			if(parking.getStatus() == Status.CLOSE){
+				ImageView image = (ImageView) view.findViewById(R.id.image_parking_open);
+				image.setImageBitmap(BitmapFactory.decodeResource(this.resources, R.drawable.parking_close));
 			}
 		}
 		return view;

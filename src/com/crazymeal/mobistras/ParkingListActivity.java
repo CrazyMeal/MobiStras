@@ -4,18 +4,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
-import com.crazymeal.asynctasks.JsonDownloadTask;
-import com.crazymeal.model.Parking;
-import com.crazymeal.parsers.JsonLocationParser;
-import com.crazymeal.parsers.JsonParkingParser;
-
 import util.Util;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.SparseArray;
 import android.widget.ListView;
+
+import com.crazymeal.asynctasks.JsonDownloadTask;
+import com.crazymeal.model.Parking;
+import com.crazymeal.parsers.JsonLocationParser;
+import com.crazymeal.parsers.JsonParkingParser;
 
 public class ParkingListActivity extends Activity{
 	private ParkingMapAdapter adapter;
@@ -34,7 +33,6 @@ public class ParkingListActivity extends Activity{
 		
 		this.locationParser = new JsonLocationParser();
 		this.parkingParser = new JsonParkingParser();
-		
 		this.listener = new AsyncTaskListener(this, this.locationParser, this.parkingParser);
 		this.jsonLocationTask = new JsonDownloadTask(this.listener);
 		this.jsonParkingTask = new JsonDownloadTask(this.listener);
@@ -86,8 +84,7 @@ public class ParkingListActivity extends Activity{
 				HashMap<Integer, Parking> finalMap = Util.merge(parkingMap, locationMap);
 
 				listView = (ListView) findViewById(R.id.listviewperso);
-				
-				adapter = new ParkingMapAdapter(this.context, R.layout.list_item_display, new ArrayList<com.crazymeal.model.Parking>(finalMap.values()));
+				adapter = new ParkingMapAdapter(this.context,getResources(), R.layout.list_item_display, new ArrayList<com.crazymeal.model.Parking>(finalMap.values()));
 				listView.setAdapter(adapter);
 			}
 		}	
