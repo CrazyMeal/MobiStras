@@ -44,6 +44,8 @@ public final class R {
         public static final int text_button_list=0x7f040004;
         public static final int text_button_preferences=0x7f040005;
         public static final int text_find_button=0x7f040003;
+        public static final int urlLocation=0x7f040007;
+        public static final int urlParking=0x7f040008;
     }
     public static final class style {
         /** 

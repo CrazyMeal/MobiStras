@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 
 public class SplashActivity extends Activity {
 	private static final int STOPSPLASH = 0;
-	private static final long SPLASHTIME = 5000;
+	private static final long SPLASHTIME = 2000;
 
 	private final transient Handler splashHandler = new Handler() {
 		@Override
