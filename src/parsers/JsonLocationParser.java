@@ -9,9 +9,9 @@ import org.json.simple.parser.ParseException;
 
 import model.Parking;
 
-public class LocationParser extends Parser{
+public class JsonLocationParser extends JsonParser{
 	
-	public LocationParser(){
+	public JsonLocationParser(){
 		this.extractedDatas = new StringBuffer();
 	}
 

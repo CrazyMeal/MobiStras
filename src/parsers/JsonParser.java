@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 import model.Parking;
 
-public abstract class Parser {
+public abstract class JsonParser {
 	protected URL urlToParse;
 	protected StringBuffer extractedDatas;
 	

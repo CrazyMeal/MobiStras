@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
+import parsers.JsonLocationParser;
+import parsers.JsonParkingParser;
 import manager.ParkingManager;
 import android.app.Activity;
 import android.content.Context;
@@ -12,6 +14,7 @@ import android.os.Bundle;
 import android.widget.ListView;
 import asynctasks.DownloadLocationTask;
 import asynctasks.DownloadParkingDataTask;
+import asynctasks.JsonDownloadTask;
 import core.LocationParser;
 import core.ParkingDataParser;
 import description.Parking;
@@ -30,26 +33,30 @@ public class ParkingListActivity extends Activity{
 	private DownloadParkingDataTask parkingTask;
 	private DownloadLocationTask locationTask;
 	
+	private JsonLocationParser locationParser;
+	private JsonParkingParser parkingParser;
+	private JsonDownloadTask jsonLocationTask, jsonParkingTask;
+	private String jsonLocationString, jsonParkingString;
+	
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list);
-		this.setThisContext(this);
-		this.setParkingDataParser(new ParkingDataParser());
-		this.setLocationParser(new LocationParser());
-		this.setParkingManager(new ParkingManager());
 		
-		this.setListener(new AsyncTaskListener());
+		this.locationParser = new JsonLocationParser();
+		this.parkingParser = new JsonParkingParser();
 		
-		this.setParkingTask(new DownloadParkingDataTask(this.getListener()));
-		this.getParkingTask().execute(new String[]{"http://carto.strasmap.eu/remote.amf.json/Parking.status"});
+		this.listener = new AsyncTaskListener(this.locationParser, this.parkingParser);
+		this.jsonLocationTask = new JsonDownloadTask(this.listener);
+		this.jsonParkingTask = new JsonDownloadTask(this.listener);
 		
-		this.setLocationTask(new DownloadLocationTask(this.getListener()));
-		this.getLocationTask().execute(new String[]{"http://carto.strasmap.eu/remote.amf.json/Parking.geometry"});
+		this.jsonLocationTask.execute(new String[]{"http://carto.strasmap.eu/remote.amf.json/Parking.geometry"});
+		this.jsonParkingTask.execute(new String[]{"http://carto.strasmap.eu/remote.amf.json/Parking.status"});
 		
 		try {
-			locationString = this.getLocationTask().get();
-			parkingDataString = this.getParkingTask().get();
+			this.jsonLocationString = this.jsonLocationTask.get();
+			this.jsonParkingString = this.jsonParkingTask.get();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (ExecutionException e) {
@@ -57,14 +64,19 @@ public class ParkingListActivity extends Activity{
 		}
 	}
 	public class AsyncTaskListener{
-		private HashMap<AsyncTask, Boolean> tasks;
-		public AsyncTaskListener(){
-			this.tasks = new HashMap<AsyncTask,Boolean>();
+		private HashMap<AsyncTask<String, Void, String>, Boolean> tasks;
+		private JsonLocationParser locationParser;
+		private JsonParkingParser parkingParser;
+		
+		public AsyncTaskListener(JsonLocationParser locationParser, JsonParkingParser parkingParser){
+			this.locationParser = locationParser;
+			this.parkingParser = parkingParser;
+			this.tasks = new HashMap<AsyncTask<String,Void, String>,Boolean>();
 		}
 		public void waitFor(AsyncTask<String, Void, String> task) {
 			this.tasks.put(task,false);
 		}
-// z
+
 		public void notify(AsyncTask<String, Void, String> task) {
 			if(this.tasks.containsKey(task)){
 				this.tasks.remove(task);
@@ -72,6 +84,8 @@ public class ParkingListActivity extends Activity{
 			this.tasks.put(task,true);
 
 			if(!this.tasks.containsValue(false)){
+				
+				/*
 				pdp.parse(parkingDataString);
 				lp.execute(locationString);
 				pm.buildList(pdp);
@@ -82,6 +96,7 @@ public class ParkingListActivity extends Activity{
 				
 				adapter = new ParkingAdapter(getThisContext(), R.layout.list_item_display,parkingList);
 				listView.setAdapter(adapter);
+				*/
 			}
 		}	
 	}

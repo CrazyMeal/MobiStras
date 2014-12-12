@@ -9,9 +9,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class ParkingParser extends Parser{
+public class JsonParkingParser extends JsonParser{
 	
-	public ParkingParser(){
+	public JsonParkingParser(){
 		this.extractedDatas = new StringBuffer();
 	}
 
