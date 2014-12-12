@@ -6,6 +6,7 @@ import java.util.concurrent.ExecutionException;
 
 import parsers.JsonLocationParser;
 import parsers.JsonParkingParser;
+import util.Util;
 import manager.ParkingManager;
 import android.app.Activity;
 import android.content.Context;
@@ -24,7 +25,7 @@ public class ParkingListActivity extends Activity{
 	private ParkingDataParser pdp;
 	private LocationParser lp;
 	private ParkingManager pm;
-	private ParkingAdapter adapter;
+	private ParkingMapAdapter adapter;
 	private ListView listView;
 	private String parkingDataString,locationString;
 	private boolean parkingDataTaskFinished=false, locationTaskFinished=false;
@@ -84,7 +85,12 @@ public class ParkingListActivity extends Activity{
 			this.tasks.put(task,true);
 
 			if(!this.tasks.containsValue(false)){
+				HashMap<Integer, model.Parking> locationMap = this.locationParser.parse(jsonLocationString);
+				HashMap<Integer, model.Parking> parkingMap = this.parkingParser.parse(jsonParkingString);
+				HashMap<Integer,model.Parking> finalMap = Util.merge(parkingMap, locationMap);
+				listView = (ListView) findViewById(R.id.listviewperso);
 				
+				adapter = new ParkingMapAdapter(getThisContext(), R.layout.list_item_display, finalMap);
 				/*
 				pdp.parse(parkingDataString);
 				lp.execute(locationString);
@@ -105,12 +111,6 @@ public class ParkingListActivity extends Activity{
 	}
 	public void setParkingList(ArrayList<HashMap<Integer,Parking>> parkingList) {
 		this.parkingList = parkingList;
-	}
-	public ParkingAdapter getAdapter() {
-		return adapter;
-	}
-	public void setAdapter(ParkingAdapter adapter) {
-		this.adapter = adapter;
 	}
 	public boolean isParkingDataTaskFinished() {
 		return parkingDataTaskFinished;

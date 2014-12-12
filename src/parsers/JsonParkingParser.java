@@ -16,11 +16,11 @@ public class JsonParkingParser extends JsonParser{
 	}
 
 	@Override
-	public HashMap<Integer, Parking> parse() {
+	public HashMap<Integer, Parking> parse(String stringToParse) {
 		JSONParser parser = new JSONParser();
 		HashMap<Integer, Parking> parkingList = new HashMap<Integer,Parking>();
 		
-		String datas = this.extractedDatas.toString();
+		String datas = stringToParse;
 
 		try {
 			Object obj = parser.parse(datas);

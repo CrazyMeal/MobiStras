@@ -16,7 +16,7 @@ public abstract class JsonParser {
 	protected URL urlToParse;
 	protected StringBuffer extractedDatas;
 	
-	public abstract HashMap<Integer, Parking> parse();
+	public abstract HashMap<Integer, Parking> parse(String stringToParse);
 	
 	public void setUrlToParse(String urlToParse) {
 		try {
