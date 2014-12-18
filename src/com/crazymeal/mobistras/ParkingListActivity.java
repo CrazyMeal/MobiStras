@@ -76,7 +76,7 @@ public class ParkingListActivity extends Activity{
 			if(this.tasks.containsKey(task)){
 				this.tasks.remove(task);
 			}
-			this.tasks.put(task,true);
+			//this.tasks.put(task,true);
 
 			if(!this.tasks.containsValue(false)){
 				HashMap<Integer, Parking> locationMap = this.locationParser.parse(jsonLocationString);
