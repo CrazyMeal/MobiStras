@@ -40,13 +40,13 @@ public class Parking implements JSONAware {
 	}
 	
 	public Parking(Cursor c){
-		this.id = c.getInt(0);
-		this.name = c.getString(1);
-		this.avaiblePlaces = c.getInt(2);
-		this.fullPlaces = c.getInt(3);
+		this.id = c.getInt(1);
+		this.name = c.getString(2);
+		this.avaiblePlaces = c.getInt(3);
+		this.fullPlaces = c.getInt(4);
 		this.status = Status.OPEN;
-		this.longitude = c.getDouble(5);
-		this.latitude = c.getDouble(6);
+		this.longitude = c.getDouble(6);
+		this.latitude = c.getDouble(7);
 	}
 	private Status setStatus(String status) {
 		if(status.equals("status_1"))

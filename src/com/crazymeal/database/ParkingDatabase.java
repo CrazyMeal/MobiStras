@@ -62,7 +62,7 @@ public class ParkingDatabase extends SQLiteOpenHelper{
 		db.close();
 	}
 
-	public List<Parking> getAllAsList() {
+	public ArrayList<Parking> getAllAsList() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor c = db.rawQuery ("SELECT * FROM " + 	TABLE_NAME, null);
 		if (c == null) {
@@ -70,7 +70,7 @@ public class ParkingDatabase extends SQLiteOpenHelper{
 		   return null;
 		}
 		c.moveToFirst();
-		List<Parking> all = new ArrayList<Parking> ();
+		ArrayList<Parking> all = new ArrayList<Parking> ();
 		while (! c.isAfterLast()) {
 		    all.add(new Parking(c));
 		    c.moveToNext();
