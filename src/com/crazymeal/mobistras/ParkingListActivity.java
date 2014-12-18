@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
-import util.Util;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -16,6 +15,7 @@ import com.crazymeal.database.ParkingDatabase;
 import com.crazymeal.model.Parking;
 import com.crazymeal.parsers.JsonLocationParser;
 import com.crazymeal.parsers.JsonParkingParser;
+import com.crazymeal.util.Util;
 
 public class ParkingListActivity extends Activity{
 	private ParkingMapAdapter adapter;
