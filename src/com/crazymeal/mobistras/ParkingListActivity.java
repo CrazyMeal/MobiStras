@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.crazymeal.asynctasks.JsonDownloadTask;
+import com.crazymeal.database.ParkingDatabase;
 import com.crazymeal.model.Parking;
 import com.crazymeal.parsers.JsonLocationParser;
 import com.crazymeal.parsers.JsonParkingParser;
@@ -86,6 +87,9 @@ public class ParkingListActivity extends Activity{
 				listView = (ListView) findViewById(R.id.listviewperso);
 				adapter = new ParkingMapAdapter(this.context,getResources(), R.layout.list_item_display, new ArrayList<com.crazymeal.model.Parking>(finalMap.values()));
 				listView.setAdapter(adapter);
+				
+				ParkingDatabase db = new ParkingDatabase(this.context);
+				db.addParkings(finalMap);
 			}
 		}	
 	}

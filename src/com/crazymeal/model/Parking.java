@@ -3,6 +3,9 @@ package com.crazymeal.model;
 import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+
 public class Parking implements JSONAware {
 	private int id, avaiblePlaces, fullPlaces;
 	private double longitude, latitude;
@@ -35,6 +38,16 @@ public class Parking implements JSONAware {
 		this.latitude = latitude;
 		this.status = status;
 	}
+	
+	public Parking(Cursor c){
+		this.id = c.getInt(0);
+		this.name = c.getString(1);
+		this.avaiblePlaces = c.getInt(2);
+		this.fullPlaces = c.getInt(3);
+		this.status = Status.OPEN;
+		this.longitude = c.getDouble(5);
+		this.latitude = c.getDouble(6);
+	}
 	private Status setStatus(String status) {
 		if(status.equals("status_1"))
 			return this.status = Status.OPEN;
@@ -52,6 +65,18 @@ public class Parking implements JSONAware {
 		this.name = name;
 		this.longitude = longitude;
 		this.latitude = latitude;
+	}
+	
+	public ContentValues getAsContentValues(){
+		ContentValues cv = new ContentValues();
+		cv.put("id",this.id);
+		cv.put("name",this.name);
+		cv.put("avaible",this.avaiblePlaces);
+		cv.put("full",this.fullPlaces);
+		cv.put("status",this.status.ordinal());
+		cv.put("longitude",this.longitude);
+		cv.put("latitude",this.latitude);
+		return cv;
 	}
 	
 	@SuppressWarnings("unchecked")

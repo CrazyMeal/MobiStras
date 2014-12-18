@@ -1,6 +1,8 @@
 package com.crazymeal.mobistras;
 
 
+import com.crazymeal.database.DatabaseActivity;
+
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -55,6 +57,14 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {				
 				Intent intent = new Intent(MainActivity.this, ParkingListActivity.class);
 				startActivity(intent);
+			}
+		});
+		
+		findViewById(R.id.button_database).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(MainActivity.this, DatabaseActivity.class));
 			}
 		});
 	}
