@@ -2,15 +2,14 @@ package com.crazymeal.database;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-
-import com.crazymeal.model.Parking;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import com.crazymeal.model.Parking;
 
 public class ParkingDatabase extends SQLiteOpenHelper{
 	public static final int DATABASE_VERSION = 1;
@@ -53,6 +52,28 @@ public class ParkingDatabase extends SQLiteOpenHelper{
 		onCreate(db);
 	}
 	
+	public boolean isEmpty(){
+		boolean isEmpty = true;
+		SQLiteDatabase db = this.getReadableDatabase();
+		
+		Cursor mCursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+		if (mCursor.moveToFirst())
+			isEmpty = false;
+		
+		Log.d("DATABASE_SQL", "Database is empty: " + isEmpty);
+		db.close();
+		return isEmpty;
+	}
+	
+	public void updateParkings(HashMap<Integer, Parking> parkings){
+		SQLiteDatabase db = this.getWritableDatabase();
+		for(Parking p : parkings.values()){
+			db.update(TABLE_NAME, p.getAsContentValues(), "id=?", new String[] {String.valueOf(p.getId())});
+			Log.d("DATABASE_SQL", "Updated parking");
+		}
+		db.close();
+	}
+	
 	public void addParkings(HashMap<Integer, Parking> parkings){
 		SQLiteDatabase db = this.getWritableDatabase();
 		for(Parking p : parkings.values()){
@@ -78,5 +99,11 @@ public class ParkingDatabase extends SQLiteOpenHelper{
 		System.out.println(all);
 		return all;
 
+	}
+
+	public void clear() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		db.execSQL("DROP TABLE IF EXISTS "+ DATABASE_NAME);
+		//onCreate(db);
 	}
 }

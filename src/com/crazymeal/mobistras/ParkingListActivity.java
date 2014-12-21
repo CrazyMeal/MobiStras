@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 
 import com.crazymeal.asynctasks.JsonDownloadTask;
@@ -77,8 +78,7 @@ public class ParkingListActivity extends Activity{
 			if(this.tasks.containsKey(task)){
 				this.tasks.remove(task);
 			}
-			//this.tasks.put(task,true);
-
+			
 			if(!this.tasks.containsValue(false)){
 				HashMap<Integer, Parking> locationMap = this.locationParser.parse(jsonLocationString);
 				HashMap<Integer, Parking> parkingMap = this.parkingParser.parse(jsonParkingString);
@@ -89,7 +89,14 @@ public class ParkingListActivity extends Activity{
 				listView.setAdapter(adapter);
 				
 				ParkingDatabase db = new ParkingDatabase(this.context);
-				db.addParkings(finalMap);
+				db.clear();
+				if(db.isEmpty()){
+					db.addParkings(finalMap);
+				}
+				else{
+					db.updateParkings(finalMap);
+				}
+				
 			}
 		}	
 	}
