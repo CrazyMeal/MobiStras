@@ -44,7 +44,6 @@ public class ParkingMapAdapter extends ArrayAdapter<com.crazymeal.model.Parking>
 			if(avaiblePlaces != null){
 				avaiblePlaces.setText(String.valueOf(parking.getAvaiblePlaces()+" / "+parking.getFullPlaces()));
 			}
-			System.out.println(parking.getStatus());
 			if(parking.getStatus() == Status.CLOSE){
 				ImageView image = (ImageView) view.findViewById(R.id.image_parking_open);
 				image.setImageBitmap(BitmapFactory.decodeResource(this.resources, R.drawable.parking_close));

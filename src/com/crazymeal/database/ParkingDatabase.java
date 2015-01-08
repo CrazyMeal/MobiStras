@@ -96,7 +96,6 @@ public class ParkingDatabase extends SQLiteOpenHelper{
 		    all.add(new Parking(c));
 		    c.moveToNext();
 		}
-		//System.out.println(all);
 		return all;
 
 	}

@@ -87,21 +87,18 @@ public class ParkingListActivity extends Activity{
 				HashMap<Integer, Parking> parkingMap = this.parkingParser.parse(jsonParkingString);
 				HashMap<Integer, Parking> finalMap = Util.merge(parkingMap, locationMap);
 				
-				listView = (ListView) findViewById(R.id.listviewperso);
-				adapter = new ParkingMapAdapter(this.context,getResources(), R.layout.list_item_display, new ArrayList<com.crazymeal.model.Parking>(finalMap.values()));
-				listView.setAdapter(adapter);
-				listView.setVisibility(View.VISIBLE);
-				ParkingDatabase db = new ParkingDatabase(this.context);
-				//db.clear();
 				
+				ParkingDatabase db = new ParkingDatabase(this.context);
 				if(db.isEmpty()){
 					db.addParkings(finalMap);
 				}
 				else{
 					db.updateParkings(finalMap);
 				}
-				
-				
+				listView = (ListView) findViewById(R.id.listviewperso);
+				adapter = new ParkingMapAdapter(this.context,getResources(), R.layout.list_item_display, db.getAllAsList());
+				listView.setAdapter(adapter);
+				listView.setVisibility(View.VISIBLE);
 			}
 		}	
 	}

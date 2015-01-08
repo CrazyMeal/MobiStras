@@ -59,14 +59,6 @@ public class MainActivity extends Activity {
 				startActivity(intent);
 			}
 		});
-		
-		findViewById(R.id.button_database).setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				startActivity(new Intent(MainActivity.this, DatabaseActivity.class));
-			}
-		});
 	}
 
 	@Override

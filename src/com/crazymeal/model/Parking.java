@@ -73,7 +73,6 @@ public class Parking implements JSONAware {
 		cv.put("name",this.name);
 		cv.put("avaible",this.avaiblePlaces);
 		cv.put("full",this.fullPlaces);
-		//System.out.println(this.getStringStatus());
 		cv.put("status",this.getStringStatus());
 		cv.put("longitude",this.longitude);
 		cv.put("latitude",this.latitude);
