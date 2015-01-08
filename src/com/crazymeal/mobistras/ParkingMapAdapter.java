@@ -3,15 +3,20 @@ package com.crazymeal.mobistras;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.crazymeal.alarms.AlarmProgrammerActivity;
+import com.crazymeal.alarms.CustomClickListener;
 import com.crazymeal.model.Parking;
 import com.crazymeal.model.Status;
 
@@ -33,7 +38,7 @@ public class ParkingMapAdapter extends ArrayAdapter<com.crazymeal.model.Parking>
 			view = inflater.inflate(R.layout.list_item_display, null);
 		}
 		
-		Parking parking = this.parkingList.get(position);
+		final Parking parking = this.parkingList.get(position);
 		
 		if(parking != null){
 			TextView parkingName = (TextView) view.findViewById(R.id.list_item_parking_name);
@@ -48,6 +53,8 @@ public class ParkingMapAdapter extends ArrayAdapter<com.crazymeal.model.Parking>
 				ImageView image = (ImageView) view.findViewById(R.id.image_parking_open);
 				image.setImageBitmap(BitmapFactory.decodeResource(this.resources, R.drawable.parking_close));
 			}
+			
+			view.setOnClickListener(new CustomClickListener(this.getContext()));
 		}
 		return view;
 	}

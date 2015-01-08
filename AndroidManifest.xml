@@ -35,6 +35,7 @@
         
         <activity android:name="com.crazymeal.mobistras.ParkingListActivity"></activity>
         <activity android:name="com.crazymeal.database.DatabaseActivity"></activity>
+        <activity android:name="com.crazymeal.alarms.AlarmProgrammerActivity"></activity>
         <service android:name="com.crazymeal.mobistras.MainService"/>
     </application>
 	

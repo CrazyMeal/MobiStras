@@ -1,5 +1,4 @@
 <resources>
-
     <string name="app_name">MobiStras</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
@@ -10,5 +9,6 @@
     <string name="description_image_parking_open">Image parking ouvert</string>
     <string name="urlLocation">http://carto.strasmap.eu/remote.amf.json/Parking.geometry</string>
     <string name="urlParking">http://carto.strasmap.eu/remote.amf.json/Parking.status</string>
-
+    <string name="text_recurrence">Récurrence:</string>
+    <string name="text_time">Horaire:</string>
 </resources>
