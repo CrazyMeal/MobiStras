@@ -12,7 +12,7 @@ import android.util.Log;
 import com.crazymeal.model.Parking;
 
 public class ParkingDatabase extends SQLiteOpenHelper{
-	public static final int DATABASE_VERSION = 1;
+	public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "Parkings.db";
     
     static final public String TABLE_NAME = "parkings";
@@ -38,7 +38,7 @@ public class ParkingDatabase extends SQLiteOpenHelper{
 				+ PARKING_NAME + " TEXT," 
 				+ PARKING_AVAIBLE + " INTEGER," 
 				+ PARKING_FULL + " INTEGER," 
-				+ PARKING_STATUS + " INTEGER,"
+				+ PARKING_STATUS + " TEXT,"
 				+ PARKING_LONGITUDE + " REAL,"
 				+ PARKING_LATITUDE + " REAL"
 				+ " )";
@@ -49,7 +49,7 @@ public class ParkingDatabase extends SQLiteOpenHelper{
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("DROP TABLE IF EXISTS "+ DATABASE_NAME);
-		onCreate(db);
+		//onCreate(db);
 	}
 	
 	public boolean isEmpty(){
@@ -96,7 +96,7 @@ public class ParkingDatabase extends SQLiteOpenHelper{
 		    all.add(new Parking(c));
 		    c.moveToNext();
 		}
-		System.out.println(all);
+		//System.out.println(all);
 		return all;
 
 	}

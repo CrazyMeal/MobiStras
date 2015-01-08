@@ -44,7 +44,7 @@ public class Parking implements JSONAware {
 		this.name = c.getString(2);
 		this.avaiblePlaces = c.getInt(3);
 		this.fullPlaces = c.getInt(4);
-		this.status = Status.OPEN;
+		this.status = this.setStatus(c.getString(5));
 		this.longitude = c.getDouble(6);
 		this.latitude = c.getDouble(7);
 	}
@@ -73,7 +73,8 @@ public class Parking implements JSONAware {
 		cv.put("name",this.name);
 		cv.put("avaible",this.avaiblePlaces);
 		cv.put("full",this.fullPlaces);
-		cv.put("status",this.status.ordinal());
+		//System.out.println(this.getStringStatus());
+		cv.put("status",this.getStringStatus());
 		cv.put("longitude",this.longitude);
 		cv.put("latitude",this.latitude);
 		return cv;
@@ -102,7 +103,25 @@ public class Parking implements JSONAware {
 		sb.append("Latit: " + this.latitude + "\n");
 		return sb.toString();
 	}
-
+	
+	private String getStringStatus(){
+		String stringStatus = "";
+		switch(this.status){
+		case OPEN:
+			stringStatus = "status_1";
+			break;
+		case FULL:
+			stringStatus = "status_2";
+			break;
+		case UNAVAIBLE:
+			stringStatus = "status_3";
+			break;
+		case CLOSE:
+			stringStatus = "status_4";
+			break;
+		}
+		return stringStatus;
+	}
 	public int getId() {
 		return id;
 	}

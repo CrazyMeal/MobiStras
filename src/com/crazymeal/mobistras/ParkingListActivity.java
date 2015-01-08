@@ -5,10 +5,12 @@ import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 
 import com.crazymeal.asynctasks.JsonDownloadTask;
@@ -48,6 +50,7 @@ public class ParkingListActivity extends Activity{
 		this.jsonParkingTask.execute(new String[]{getString(R.string.urlParking)});
 		
 		try {
+			
 			this.jsonLocationString = this.jsonLocationTask.get();
 			this.jsonParkingString = this.jsonParkingTask.get();
 		} catch (InterruptedException e) {
@@ -83,19 +86,21 @@ public class ParkingListActivity extends Activity{
 				HashMap<Integer, Parking> locationMap = this.locationParser.parse(jsonLocationString);
 				HashMap<Integer, Parking> parkingMap = this.parkingParser.parse(jsonParkingString);
 				HashMap<Integer, Parking> finalMap = Util.merge(parkingMap, locationMap);
-
+				
 				listView = (ListView) findViewById(R.id.listviewperso);
 				adapter = new ParkingMapAdapter(this.context,getResources(), R.layout.list_item_display, new ArrayList<com.crazymeal.model.Parking>(finalMap.values()));
 				listView.setAdapter(adapter);
-				
+				listView.setVisibility(View.VISIBLE);
 				ParkingDatabase db = new ParkingDatabase(this.context);
-				db.clear();
+				//db.clear();
+				
 				if(db.isEmpty()){
 					db.addParkings(finalMap);
 				}
 				else{
 					db.updateParkings(finalMap);
 				}
+				
 				
 			}
 		}	
