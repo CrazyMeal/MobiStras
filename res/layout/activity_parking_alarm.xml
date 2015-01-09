@@ -4,6 +4,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/text_alarm_infos" />
+
+    <LinearLayout
+        android:id="@+id/layout_recurrence"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/text_view_recurrence"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/text_recurrence"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Spinner
+            android:id="@+id/spinner_recurrence"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/layout_time"
         android:layout_width="match_parent"
@@ -24,25 +51,10 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/layout_recurrence"
+    <Button
+        android:id="@+id/button_validate_alarm"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:id="@+id/text_view_recurrence"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:text="@string/text_recurrence"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <Spinner
-            android:id="@+id/spinner_recurrence"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:text="@string/text_button_validate_alarm" />
 
 </LinearLayout>

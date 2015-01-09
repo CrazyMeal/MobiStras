@@ -2,6 +2,7 @@ package com.crazymeal.mobistras;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -23,11 +24,13 @@ import com.crazymeal.model.Status;
 public class ParkingMapAdapter extends ArrayAdapter<com.crazymeal.model.Parking>{
 	private ArrayList<com.crazymeal.model.Parking> parkingList;
 	private Resources resources;
+	private Activity originActivity;
 	
-	public ParkingMapAdapter(Context context, Resources resources, int textViewRessourceId, ArrayList<com.crazymeal.model.Parking> parkingList){
+	public ParkingMapAdapter(Activity activity, Context context, Resources resources, int textViewRessourceId, ArrayList<com.crazymeal.model.Parking> parkingList){
 		super(context, textViewRessourceId, parkingList);
 		this.parkingList = parkingList;
 		this.resources = resources;
+		this.originActivity = activity;
 	}
 	
 	public View getView(int position, View convertView, ViewGroup parentView){
@@ -53,8 +56,7 @@ public class ParkingMapAdapter extends ArrayAdapter<com.crazymeal.model.Parking>
 				ImageView image = (ImageView) view.findViewById(R.id.image_parking_open);
 				image.setImageBitmap(BitmapFactory.decodeResource(this.resources, R.drawable.parking_close));
 			}
-			
-			view.setOnClickListener(new CustomClickListener(this.getContext()));
+			view.setOnClickListener(new CustomClickListener(this.originActivity, this.getContext()));
 		}
 		return view;
 	}

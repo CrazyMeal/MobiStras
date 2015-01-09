@@ -11,4 +11,6 @@
     <string name="urlParking">http://carto.strasmap.eu/remote.amf.json/Parking.status</string>
     <string name="text_recurrence">Récurrence:</string>
     <string name="text_time">Horaire:</string>
+    <string name="text_button_validate_alarm">Valider</string>
+    <string name="text_alarm_infos">Programmez une alarme afin de vérifier le nombre de place disponible</string>
 </resources>

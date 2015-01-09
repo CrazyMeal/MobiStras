@@ -1,8 +1,6 @@
 package com.crazymeal.mobistras;
 
 
-import com.crazymeal.database.DatabaseActivity;
-
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
