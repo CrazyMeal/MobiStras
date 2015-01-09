@@ -38,6 +38,7 @@ public class ParkingListActivity extends Activity{
 		this.locationParser = new JsonLocationParser();
 		this.parkingParser = new JsonParkingParser();
 		this.listener = new AsyncTaskListener(this, this.locationParser, this.parkingParser);
+		
 		this.jsonLocationTask = new JsonDownloadTask(this.listener);
 		this.jsonParkingTask = new JsonDownloadTask(this.listener);
 	}
@@ -46,17 +47,19 @@ public class ParkingListActivity extends Activity{
 	@Override
 	protected void onStart() {
 		super.onStart();
-		this.jsonLocationTask.execute(new String[]{getString(R.string.urlLocation)});
-		this.jsonParkingTask.execute(new String[]{getString(R.string.urlParking)});
+		if(!this.jsonLocationTask.isHasBeenExecuted() && !jsonParkingTask.isHasBeenExecuted()){
+			this.jsonLocationTask.execute(new String[]{getString(R.string.urlLocation)});
+			this.jsonParkingTask.execute(new String[]{getString(R.string.urlParking)});
 		
-		try {
-			
-			this.jsonLocationString = this.jsonLocationTask.get();
-			this.jsonParkingString = this.jsonParkingTask.get();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
+			try {
+				
+				this.jsonLocationString = this.jsonLocationTask.get();
+				this.jsonParkingString = this.jsonParkingTask.get();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -86,7 +89,6 @@ public class ParkingListActivity extends Activity{
 				HashMap<Integer, Parking> locationMap = this.locationParser.parse(jsonLocationString);
 				HashMap<Integer, Parking> parkingMap = this.parkingParser.parse(jsonParkingString);
 				HashMap<Integer, Parking> finalMap = Util.merge(parkingMap, locationMap);
-				
 				
 				ParkingDatabase db = new ParkingDatabase(this.context);
 				if(db.isEmpty()){

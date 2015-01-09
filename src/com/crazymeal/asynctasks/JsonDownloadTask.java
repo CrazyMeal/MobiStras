@@ -15,10 +15,12 @@ import android.os.AsyncTask;
 
 public class JsonDownloadTask extends AsyncTask<String,Void, String>{
 	private AsyncTaskListener listener;
+	private boolean hasBeenExecuted;
 	
 	public JsonDownloadTask(AsyncTaskListener listener){
 		this.listener = listener;
 		this.listener.waitFor(this);
+		this.hasBeenExecuted = false;
 	}
 	
 	@Override
@@ -52,6 +54,15 @@ public class JsonDownloadTask extends AsyncTask<String,Void, String>{
 	}
 	 @Override
 	 protected void onPostExecute(String result) {
+		 this.hasBeenExecuted = true;
 		 this.listener.notify(this);
 	   }
+
+	public boolean isHasBeenExecuted() {
+		return hasBeenExecuted;
+	}
+
+	public void setHasBeenExecuted(boolean hasBeenExecuted) {
+		this.hasBeenExecuted = hasBeenExecuted;
+	}
 }
