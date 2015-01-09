@@ -72,7 +72,10 @@ public class ParkingListActivity extends Activity{
 		super.onActivityResult(requestCode, resultCode, data);
 		if(requestCode == 1){
 			if(resultCode == RESULT_OK){
-				Toast.makeText(getApplicationContext(), data.getStringExtra("test"), Toast.LENGTH_SHORT).show();
+				int hour = data.getIntExtra("hour", 0);
+				int minute = data.getIntExtra("minute", 0);
+				String recurrence = data.getStringExtra("recurrence");
+				Toast.makeText(getApplicationContext(), "Alarm> " + hour+":"+minute+" "+recurrence, Toast.LENGTH_SHORT).show();
 			}
 		}
 	}
