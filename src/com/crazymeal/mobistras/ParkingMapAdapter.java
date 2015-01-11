@@ -38,14 +38,14 @@ public class ParkingMapAdapter extends ArrayAdapter<com.crazymeal.model.Parking>
 		
 		if (view == null) {
 			LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			view = inflater.inflate(R.layout.list_item_display, null);
+			view = inflater.inflate(R.layout.new_list_item_display, null);
 		}
 		
 		final Parking parking = this.parkingList.get(position);
 		
 		if(parking != null){
-			TextView parkingName = (TextView) view.findViewById(R.id.list_item_parking_name);
-			TextView avaiblePlaces = (TextView) view.findViewById(R.id.list_item_avaibleplaces);
+			TextView parkingName = (TextView) view.findViewById(R.id.textView_parking_name);
+			TextView avaiblePlaces = (TextView) view.findViewById(R.id.textView_available_places);
 			if(parkingName != null){
 				parkingName.setText(parking.getName());
 			}
@@ -53,7 +53,7 @@ public class ParkingMapAdapter extends ArrayAdapter<com.crazymeal.model.Parking>
 				avaiblePlaces.setText(String.valueOf(parking.getAvaiblePlaces()+" / "+parking.getFullPlaces()));
 			}
 			if(parking.getStatus() == Status.CLOSE){
-				ImageView image = (ImageView) view.findViewById(R.id.image_parking_open);
+				ImageView image = (ImageView) view.findViewById(R.id.imageView_parking_logo);
 				image.setImageBitmap(BitmapFactory.decodeResource(this.resources, R.drawable.parking_close));
 			}
 			view.setOnClickListener(new CustomClickListener(this.originActivity, this.getContext()));

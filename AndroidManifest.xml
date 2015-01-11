@@ -33,8 +33,9 @@
             </intent-filter>
         </activity>
         
-        <activity android:name="com.crazymeal.mobistras.ParkingListActivity"></activity>
-        <activity android:name="com.crazymeal.database.DatabaseActivity"></activity>
+        <activity 
+            android:name="com.crazymeal.mobistras.ParkingListActivity"
+            android:parentActivityName="com.crazymeal.mobistras.MainActivity"></activity>
         <activity 
             android:name="com.crazymeal.alarms.AlarmProgrammerActivity"
             android:parentActivityName="com.crazymeal.mobistras.ParkingListActivity" >

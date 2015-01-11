@@ -1,19 +1,15 @@
 package com.crazymeal.mobistras;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.crazymeal.asynctasks.JsonDownloadTask;
 import com.crazymeal.database.ParkingDatabase;
@@ -43,12 +39,6 @@ public class ParkingListActivity extends Activity{
 		
 		this.jsonLocationTask = new JsonDownloadTask(this.listener);
 		this.jsonParkingTask = new JsonDownloadTask(this.listener);
-	}
-	
-	
-	@Override
-	protected void onStart() {
-		super.onStart();
 		if(!this.jsonLocationTask.isHasBeenExecuted() && !jsonParkingTask.isHasBeenExecuted()){
 			this.jsonLocationTask.execute(new String[]{getString(R.string.urlLocation)});
 			this.jsonParkingTask.execute(new String[]{getString(R.string.urlParking)});
@@ -63,9 +53,7 @@ public class ParkingListActivity extends Activity{
 				e.printStackTrace();
 			}
 		}
-	}
-	
-	
+	}	
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -75,7 +63,6 @@ public class ParkingListActivity extends Activity{
 				int hour = data.getIntExtra("hour", 0);
 				int minute = data.getIntExtra("minute", 0);
 				String recurrence = data.getStringExtra("recurrence");
-				Toast.makeText(getApplicationContext(), "Alarm> " + hour+":"+minute+" "+recurrence, Toast.LENGTH_SHORT).show();
 			}
 		}
 	}
@@ -117,6 +104,7 @@ public class ParkingListActivity extends Activity{
 				else{
 					db.updateParkings(finalMap);
 				}
+				db.close();
 				listView = (ListView) findViewById(R.id.listviewperso);
 				adapter = new ParkingMapAdapter(this.originActivity, this.context,getResources(), R.layout.list_item_display, db.getAllAsList());
 				listView.setAdapter(adapter);
