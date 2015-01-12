@@ -13,15 +13,16 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.crazymeal.mobistras.R;
 
-public class AlarmProgrammerActivity extends Activity{
+public class DetailedParkingActivity extends Activity{
 	private Button validateButton;
 	private TimePicker timePicker;
 	private Spinner spinner;
-	
+	private TextView textViewParkingName;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,6 +34,9 @@ public class AlarmProgrammerActivity extends Activity{
 		this.spinner.setAdapter(adapter);
 		
 		this.timePicker = (TimePicker)findViewById(R.id.timePicker);
+		
+		this.textViewParkingName = (TextView) findViewById(R.id.textView_detailed_parking_name);
+		this.textViewParkingName.setText(getIntent().getStringExtra("parkingName"));
 		
 		this.validateButton = (Button)findViewById(R.id.button_validate_alarm);
 		this.validateButton.setOnClickListener(new OnClickListener() {
@@ -48,14 +52,14 @@ public class AlarmProgrammerActivity extends Activity{
 				finish();
 			}
 		});
-		
+		/*
 		NotificationCompat.Builder mBuilder =
 		        new NotificationCompat.Builder(this)
 		        .setSmallIcon(android.R.drawable.ic_dialog_map)
 		        .setContentTitle("My notification")
 		        .setContentText("Hello World!");
 		// Creates an explicit intent for an Activity in your app
-		Intent resultIntent = new Intent(this, AlarmProgrammerActivity.class);
+		Intent resultIntent = new Intent(this, DetailedParkingActivity.class);
 
 		// The stack builder object will contain an artificial back stack for the
 		// started Activity.
@@ -63,7 +67,7 @@ public class AlarmProgrammerActivity extends Activity{
 		// your application to the Home screen.
 		TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
 		// Adds the back stack for the Intent (but not the Intent itself)
-		stackBuilder.addParentStack(AlarmProgrammerActivity.class);
+		stackBuilder.addParentStack(DetailedParkingActivity.class);
 		// Adds the Intent that starts the Activity to the top of the stack
 		stackBuilder.addNextIntent(resultIntent);
 		PendingIntent resultPendingIntent =
@@ -76,5 +80,6 @@ public class AlarmProgrammerActivity extends Activity{
 		    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		// mId allows you to update the notification later on.
 		mNotificationManager.notify(0, mBuilder.build());
+		*/
 	}
 }

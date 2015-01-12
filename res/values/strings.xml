@@ -19,4 +19,5 @@
     <string name="content_description_parking_logo">Logo_parking</string>
     <string name="content_description_logo_map">Logo_map</string>
     <string name="text_programmed_alarms">Alertes programmées:</string>
+    <string name="text_detailed_alarms">Alarme(s) programmée(s)</string>
 </resources>

@@ -2,14 +2,55 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:contentDescription="@string/content_description_logo_map"
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textView_detailed_parking_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="@string/text_alarm_infos" />
+        android:gravity="center_vertical|center_horizontal"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/content_description_logo_map"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textView_detailed_navigate"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/text_navigate_to" />
+
+        <ImageButton
+            android:id="@+id/imageButton1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/content_description_logo_map"
+            android:src="@android:drawable/ic_dialog_map" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_detailed_alarms" />
+
+        <TextView
+            android:id="@+id/textView_detailed_alarm_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layout_recurrence"
@@ -21,8 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:text="@string/text_recurrence"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="@string/text_recurrence"/>
 
         <Spinner
             android:id="@+id/spinner_recurrence"
@@ -41,8 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:text="@string/text_time"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="@string/text_time" />
 
         <TimePicker
             android:id="@+id/timePicker"
