@@ -11,6 +11,7 @@ public class Parking implements JSONAware {
 	private double longitude, latitude;
 	private String name;
 	private Status status;
+	private boolean favorite;
 	
 	public Parking(){
 		this.id = 0;
@@ -20,6 +21,7 @@ public class Parking implements JSONAware {
 		this.latitude = 0;
 		this.name = "default";
 		this.status = Status.CLOSE;
+		this.favorite = false;
 	}
 	
 	public Parking(int id, int avaiblePlaces, int fullPlaces, String name, String status){
@@ -29,7 +31,7 @@ public class Parking implements JSONAware {
 		this.name = name;
 		this.status = this.setStatus(status);
 	}
-	public Parking(int id, int avaiblePlaces, int fullPlaces, String name, Status status, Double longitude, Double latitude){
+	public Parking(int id, int avaiblePlaces, int fullPlaces, String name, Status status, Double longitude, Double latitude, int favorite){
 		this.id = id;
 		this.avaiblePlaces = avaiblePlaces;
 		this.fullPlaces = fullPlaces;
@@ -37,6 +39,7 @@ public class Parking implements JSONAware {
 		this.longitude = longitude;
 		this.latitude = latitude;
 		this.status = status;
+		this.favorite = (favorite == 0) ? false : true;
 	}
 	
 	public Parking(Cursor c){
@@ -47,6 +50,7 @@ public class Parking implements JSONAware {
 		this.status = this.setStatus(c.getString(5));
 		this.longitude = c.getDouble(6);
 		this.latitude = c.getDouble(7);
+		this.favorite = (c.getInt(8) == 0) ? false : true;
 	}
 	private Status setStatus(String status) {
 		if(status.equals("status_1"))
@@ -76,6 +80,7 @@ public class Parking implements JSONAware {
 		cv.put("status",this.getStringStatus());
 		cv.put("longitude",this.longitude);
 		cv.put("latitude",this.latitude);
+		cv.put("favorite", (this.favorite) ? 1 : 0);
 		return cv;
 	}
 	

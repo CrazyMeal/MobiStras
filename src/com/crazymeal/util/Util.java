@@ -22,7 +22,7 @@ public class Util {
 						locationParking.getName(), 
 						parkingValue.getStatus(),
 						locationParking.getLongitude() ,
-						locationParking.getLatitude());
+						locationParking.getLatitude(), 0);
 				finalList.put(p.getKey(), tmpParking);
 			}
 		}
