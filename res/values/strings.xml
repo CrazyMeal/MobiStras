@@ -2,9 +2,6 @@
     <string name="app_name">MobiStras</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="text_find_button">Trouver un parking</string>
-    <string name="text_button_list">Liste des parkings</string>
-    <string name="text_button_database">Database</string>
     <string name="text_button_preferences">Préférences</string>
     <string name="description_image_parking_open">Image parking ouvert</string>
     <string name="urlLocation">http://carto.strasmap.eu/remote.amf.json/Parking.geometry</string>
@@ -19,5 +16,6 @@
     <string name="content_description_parking_logo">Logo_parking</string>
     <string name="content_description_logo_map">Logo_map</string>
     <string name="text_programmed_alarms">Alertes programmées:</string>
-    <string name="text_detailed_alarms">Alarme(s) programmée(s)</string>
+    <string name="text_detailed_alarms">Alarme programmée:</string>
+    <string name="text_detailed_isreccurent">Alarme récurrente</string>
 </resources>

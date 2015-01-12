@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -23,6 +26,8 @@ public class DetailedParkingActivity extends Activity{
 	private TimePicker timePicker;
 	private Spinner spinner;
 	private TextView textViewParkingName;
+	private CheckBox isRecurrentCheckbox;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,6 +44,7 @@ public class DetailedParkingActivity extends Activity{
 		this.textViewParkingName.setText(getIntent().getStringExtra("parkingName"));
 		
 		this.validateButton = (Button)findViewById(R.id.button_validate_alarm);
+		
 		this.validateButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -50,6 +56,16 @@ public class DetailedParkingActivity extends Activity{
 				setResult(RESULT_OK, intent);
 				
 				finish();
+			}
+		});
+		this.isRecurrentCheckbox = (CheckBox)findViewById(R.id.checkBox_isRecurrent);
+		this.isRecurrentCheckbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if(isChecked)
+					findViewById(R.id.layout_recurrence).setVisibility(View.VISIBLE);
+				else
+					findViewById(R.id.layout_recurrence).setVisibility(View.GONE);
 			}
 		});
 		/*

@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		//setContentView(R.layout.activity_main);
 		
 		try {
 			Intent intent = new Intent(MainActivity.this, MainService.class);
@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		/*
 		this.listButton = (Button) findViewById(R.id.button_list);
 		
 		this.listButton.setOnClickListener(new OnClickListener() {
@@ -57,6 +57,7 @@ public class MainActivity extends Activity {
 				startActivity(intent);
 			}
 		});
+		*/
 	}
 
 	@Override

@@ -107,7 +107,7 @@ public class ParkingListActivity extends Activity{
 				}
 				db.close();
 				listView = (ListView) findViewById(R.id.listviewperso);
-				adapter = new ParkingMapAdapter(this.originActivity, this.context,getResources(), R.layout.list_item_display, db.getAllAsList());
+				adapter = new ParkingMapAdapter(this.originActivity, this.context,getResources(), R.layout.new_list_item_display, db.getAllAsList());
 				listView.setAdapter(adapter);
 				listView.setVisibility(View.VISIBLE);
 			}
