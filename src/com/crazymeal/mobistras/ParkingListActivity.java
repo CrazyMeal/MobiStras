@@ -54,7 +54,7 @@ public class ParkingListActivity extends Activity{
 			}
 		}
 	}	
-
+	/*
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -66,7 +66,7 @@ public class ParkingListActivity extends Activity{
 			}
 		}
 	}
-
+*/
 
 
 	public class AsyncTaskListener{

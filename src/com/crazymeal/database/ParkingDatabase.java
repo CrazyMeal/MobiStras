@@ -87,7 +87,7 @@ public class ParkingDatabase extends SQLiteOpenHelper{
 
 	public ArrayList<Parking> getAllAsList() {
 		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor c = db.rawQuery ("SELECT * FROM " + 	TABLE_NAME, null);
+		Cursor c = db.rawQuery ("SELECT * FROM " + 	TABLE_NAME + " ORDER BY " + PARKING_STATUS, null);
 		if (c == null) {
 		   db.close();
 		   return null;

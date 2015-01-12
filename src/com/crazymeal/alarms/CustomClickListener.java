@@ -23,7 +23,8 @@ public class CustomClickListener implements OnClickListener{
 	public void onClick(View v) {
 		Intent intent = new Intent(this.context, DetailedParkingActivity.class);
 		intent.putExtra("parkingName", this.parking.getName());
-		this.originActivity.startActivityForResult(intent, CustomClickListener.REQUEST_DETAILS);
+		this.originActivity.startActivity(intent);
+		//this.originActivity.startActivityForResult(intent, CustomClickListener.REQUEST_DETAILS);
 	}
 	
 }

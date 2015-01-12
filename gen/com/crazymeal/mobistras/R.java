@@ -22,6 +22,7 @@ public final class R {
         public static final int button_validate_alarm=0x7f08000e;
         public static final int checkBox_isRecurrent=0x7f080006;
         public static final int imageButton1=0x7f080003;
+        public static final int imageView_favorite=0x7f080013;
         public static final int imageView_parking_logo=0x7f080010;
         public static final int layout_recurrence=0x7f080008;
         public static final int layout_recurrence_panel=0x7f080007;
@@ -38,7 +39,6 @@ public final class R {
         public static final int textView_detailed_navigate=0x7f080002;
         public static final int textView_detailed_parking_name=0x7f080001;
         public static final int textView_parking_name=0x7f080011;
-        public static final int textView_programmed_alarms=0x7f080013;
         public static final int text_view_recurrence=0x7f080009;
         public static final int text_view_time=0x7f08000c;
         public static final int timePicker=0x7f08000d;
@@ -55,6 +55,7 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f050000;
+        public static final int content_description_favorite=0x7f050013;
         public static final int content_description_logo_map=0x7f05000f;
         public static final int content_description_parking_logo=0x7f05000e;
         public static final int description_image_parking_open=0x7f050004;

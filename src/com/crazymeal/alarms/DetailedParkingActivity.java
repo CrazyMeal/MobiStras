@@ -44,17 +44,19 @@ public class DetailedParkingActivity extends Activity{
 		this.textViewParkingName.setText(getIntent().getStringExtra("parkingName"));
 		
 		this.validateButton = (Button)findViewById(R.id.button_validate_alarm);
-		
-		this.validateButton.setOnClickListener(new OnClickListener() {
-			
+		this.validateButton.setOnClickListener(new OnClickListener() {	
 			@Override
 			public void onClick(View v) {
+				if(!isRecurrentCheckbox.isChecked())
+					programSimpleAlarm(timePicker.getCurrentHour(), timePicker.getCurrentMinute());
+				/*
 				Intent intent = getIntent();
 				intent.putExtra("hour", timePicker.getCurrentHour());
 				intent.putExtra("minute", timePicker.getCurrentMinute());
-				intent.putExtra("recurrence", spinner.getSelectedItem().toString());
+				if(isRecurrentCheckbox.isChecked())
+					intent.putExtra("recurrence", spinner.getSelectedItem().toString());
 				setResult(RESULT_OK, intent);
-				
+				*/
 				finish();
 			}
 		});
@@ -97,5 +99,8 @@ public class DetailedParkingActivity extends Activity{
 		// mId allows you to update the notification later on.
 		mNotificationManager.notify(0, mBuilder.build());
 		*/
+	}
+	private void programSimpleAlarm(int hour, int min){
+		
 	}
 }

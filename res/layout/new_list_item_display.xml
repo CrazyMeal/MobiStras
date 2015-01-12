@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:contentDescription="@string/content_description_favorite"
     android:orientation="horizontal" >
 
     <ImageView
@@ -13,7 +14,7 @@
         android:src="@drawable/parking_open" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="213dp"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
@@ -40,23 +41,14 @@
                 android:layout_height="wrap_content"
                 android:gravity="end" />
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/textView_detailed_parking_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_programmed_alarms" />
-
-            <TextView
-                android:id="@+id/textView_programmed_alarms"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="end" />
-        </LinearLayout>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView_favorite"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/content_description_favorite"
+        android:scaleType="center"
+        android:src="@android:drawable/star_big_off" />
 
 </LinearLayout>
