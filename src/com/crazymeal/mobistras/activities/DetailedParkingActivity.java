@@ -1,4 +1,4 @@
-package com.crazymeal.detailed;
+package com.crazymeal.mobistras.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -51,7 +51,6 @@ public class DetailedParkingActivity extends Activity{
 		});
 	}
 	
-	
 	@Override
 	protected void onStart() {
 		super.onStart();
@@ -63,6 +62,10 @@ public class DetailedParkingActivity extends Activity{
 
 
 	private void programSimpleAlarm(int hour, int min){
-		
+		if(this.isRecurrentCheckbox.isChecked()){
+			
+		} else {
+			
+		}
 	}
 }

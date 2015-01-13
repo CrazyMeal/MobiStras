@@ -1,5 +1,9 @@
-package com.crazymeal.mobistras;
+package com.crazymeal.mobistras.activities;
 
+
+import com.crazymeal.mobistras.MainService;
+import com.crazymeal.mobistras.R;
+import com.crazymeal.mobistras.R.menu;
 
 import android.app.Activity;
 import android.content.ComponentName;

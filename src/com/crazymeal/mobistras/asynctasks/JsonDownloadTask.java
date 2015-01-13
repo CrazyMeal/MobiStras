@@ -1,4 +1,4 @@
-package com.crazymeal.asynctasks;
+package com.crazymeal.mobistras.asynctasks;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-import com.crazymeal.mobistras.ParkingListActivity.AsyncTaskListener;
+import com.crazymeal.mobistras.activities.ParkingListActivity.AsyncTaskListener;
 
 import android.os.AsyncTask;
 

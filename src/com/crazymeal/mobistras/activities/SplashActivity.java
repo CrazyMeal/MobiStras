@@ -1,4 +1,8 @@
-package com.crazymeal.mobistras;
+package com.crazymeal.mobistras.activities;
+
+import com.crazymeal.mobistras.R;
+import com.crazymeal.mobistras.R.id;
+import com.crazymeal.mobistras.R.layout;
 
 import android.app.Activity;
 import android.content.Intent;

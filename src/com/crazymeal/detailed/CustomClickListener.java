@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
-import com.crazymeal.database.ParkingDatabase;
+import com.crazymeal.mobistras.ParkingDatabase;
 import com.crazymeal.model.Parking;
 
 public class CustomClickListener implements OnClickListener{

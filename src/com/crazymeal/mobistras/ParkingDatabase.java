@@ -1,4 +1,4 @@
-package com.crazymeal.database;
+package com.crazymeal.mobistras;
 
 import java.util.ArrayList;
 import java.util.HashMap;
