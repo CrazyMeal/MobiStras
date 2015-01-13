@@ -59,13 +59,16 @@ public class ParkingMapAdapter extends ArrayAdapter<com.crazymeal.mobistras.mode
 			viewHolder.parkingNameView.setText(parking.getName());
 			viewHolder.avaiblePlacesView.setText(String.valueOf(parking.getAvaiblePlaces()+" / "+parking.getFullPlaces()));
 			
-			if(parking.getStatus() == Status.CLOSE){
+			if(parking.getStatus() == Status.CLOSE || parking.getStatus() == Status.FULL)
 				viewHolder.parkingLogo.setImageBitmap(BitmapFactory.decodeResource(this.resources, R.drawable.parking_close));
-			}
+			else
+				viewHolder.parkingLogo.setImageBitmap(BitmapFactory.decodeResource(this.resources, R.drawable.parking_open));
 			
-			if(parking.isFavorite()){
+			if(parking.isFavorite())
 				viewHolder.favoriteLogo.setImageBitmap(BitmapFactory.decodeResource(this.resources, android.R.drawable.star_big_on));
-			}
+			else
+				viewHolder.favoriteLogo.setImageBitmap(BitmapFactory.decodeResource(this.resources, android.R.drawable.star_big_off));
+				
 			viewHolder.favoriteLogo.setOnClickListener(new CustomClickListener(parking, viewHolder.favoriteLogo,this.resources, this.getContext()));
 			
 			Log.d("LIST_ADAPTER", Boolean.toString(parking.isFavorite()));
