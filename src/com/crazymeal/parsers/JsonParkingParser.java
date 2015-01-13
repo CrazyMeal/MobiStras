@@ -1,14 +1,14 @@
 package com.crazymeal.parsers;
 
 import java.util.HashMap;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
+import android.annotation.SuppressLint;
 import com.crazymeal.model.Parking;
 
+@SuppressLint("UseSparseArrays")
 public class JsonParkingParser extends JsonParser{
 	
 	public JsonParkingParser(){

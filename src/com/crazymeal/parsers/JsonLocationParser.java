@@ -1,12 +1,11 @@
 package com.crazymeal.parsers;
 
 import java.util.HashMap;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
+import android.annotation.SuppressLint;
 import com.crazymeal.model.Parking;
 
 public class JsonLocationParser extends JsonParser{
@@ -15,6 +14,7 @@ public class JsonLocationParser extends JsonParser{
 		this.extractedDatas = new StringBuffer();
 	}
 	
+	@SuppressLint("UseSparseArrays")
 	@Override
 	public HashMap<Integer, Parking> parse(String stringToParse) {
 		JSONParser parser = new JSONParser();

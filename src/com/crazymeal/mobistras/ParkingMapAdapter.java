@@ -2,7 +2,6 @@ package com.crazymeal.mobistras;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
@@ -21,13 +20,11 @@ import com.crazymeal.model.Status;
 public class ParkingMapAdapter extends ArrayAdapter<com.crazymeal.model.Parking>{
 	private ArrayList<com.crazymeal.model.Parking> parkingList;
 	private Resources resources;
-	private Activity originActivity;
 	
-	public ParkingMapAdapter(Activity activity, Context context, Resources resources, int textViewRessourceId, ArrayList<com.crazymeal.model.Parking> parkingList){
+	public ParkingMapAdapter(Context context, Resources resources, int textViewRessourceId, ArrayList<com.crazymeal.model.Parking> parkingList){
 		super(context, textViewRessourceId, parkingList);
 		this.parkingList = parkingList;
 		this.resources = resources;
-		this.originActivity = activity;
 	}
 	
 	public View getView(int position, View convertView, ViewGroup parentView){
@@ -35,7 +32,7 @@ public class ParkingMapAdapter extends ArrayAdapter<com.crazymeal.model.Parking>
 		
 		if (view == null) {
 			LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			view = inflater.inflate(R.layout.new_list_item_display, null);
+			view = inflater.inflate(R.layout.new_list_item_display, parentView, false);
 		}
 		
 		final Parking parking = this.parkingList.get(position);

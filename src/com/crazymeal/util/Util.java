@@ -2,11 +2,11 @@ package com.crazymeal.util;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
-
 import org.json.simple.JSONArray;
-
+import android.annotation.SuppressLint;
 import com.crazymeal.model.Parking;
 
+@SuppressLint("UseSparseArrays")
 public class Util {
 	
 	public static HashMap<Integer,Parking> merge(HashMap<Integer,Parking> parkingList, HashMap<Integer,Parking> locationList){
