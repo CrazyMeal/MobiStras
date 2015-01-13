@@ -55,11 +55,12 @@ public class ParkingMapAdapter extends ArrayAdapter<com.crazymeal.model.Parking>
 			}
 			
 			ImageView image = (ImageView) view.findViewById(R.id.imageView_favorite);
-			image.setOnClickListener(new CustomClickListener(parking, image,this.resources, this.getContext()));
-			Log.d("LIST_ADAPTER", Boolean.toString(parking.isFavorite()));
 			if(parking.isFavorite()){
 				image.setImageBitmap(BitmapFactory.decodeResource(this.resources, android.R.drawable.star_big_on));
 			}
+			image.setOnClickListener(new CustomClickListener(parking, image,this.resources, this.getContext()));
+			Log.d("LIST_ADAPTER", Boolean.toString(parking.isFavorite()));
+			
 		}
 		return view;
 	}

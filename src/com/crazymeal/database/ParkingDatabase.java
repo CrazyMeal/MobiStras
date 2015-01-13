@@ -101,6 +101,23 @@ public class ParkingDatabase extends SQLiteOpenHelper{
 		return all;
 
 	}
+	public ArrayList<Parking> getAllFavorites() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor c = db.rawQuery ("SELECT * FROM " + 	TABLE_NAME + " WHERE " + PARKING_FAVORITE + " = ?" , new String[]{"1"});
+		if (c == null) {
+		   db.close();
+		   return null;
+		}
+		c.moveToFirst();
+		ArrayList<Parking> all = new ArrayList<Parking> ();
+		while (! c.isAfterLast()) {
+		    all.add(new Parking(c));
+		    c.moveToNext();
+		}
+		return all;
+
+	}
+	
 	public void setParkingFavorite(Parking p){
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.update(TABLE_NAME, p.getAsContentValues(), "id=?", new String[] {String.valueOf(p.getId())});
