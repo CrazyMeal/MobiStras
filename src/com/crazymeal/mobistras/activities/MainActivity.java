@@ -16,7 +16,6 @@ import android.os.Messenger;
 import android.view.Menu;
 import android.widget.Button;
 
-import com.crazymeal.mobistras.MainService;
 import com.crazymeal.mobistras.R;
 
 public class MainActivity extends Activity {

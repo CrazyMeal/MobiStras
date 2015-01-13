@@ -19,6 +19,14 @@ import com.crazymeal.mobistras.model.Status;
 public class ParkingMapAdapter extends ArrayAdapter<com.crazymeal.mobistras.model.Parking>{
 	private ArrayList<com.crazymeal.mobistras.model.Parking> parkingList;
 	private Resources resources;
+	private ViewHolderItem viewHolder;
+	
+	static class ViewHolderItem {
+	    TextView parkingNameView;
+	    TextView avaiblePlacesView;
+	    ImageView parkingLogo;
+	    ImageView favoriteLogo;
+	}
 	
 	public ParkingMapAdapter(Context context, Resources resources, int textViewRessourceId, ArrayList<com.crazymeal.mobistras.model.Parking> parkingList){
 		super(context, textViewRessourceId, parkingList);
@@ -27,37 +35,42 @@ public class ParkingMapAdapter extends ArrayAdapter<com.crazymeal.mobistras.mode
 	}
 	
 	public View getView(int position, View convertView, ViewGroup parentView){
-		View view = convertView;
 		
-		if (view == null) {
+		if (convertView == null) {
 			LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			view = inflater.inflate(R.layout.new_list_item_display, parentView, false);
+			convertView = inflater.inflate(R.layout.new_list_item_display, parentView, false);
+			
+			viewHolder = new ViewHolderItem();
+				
+			viewHolder.parkingNameView = (TextView) convertView.findViewById(R.id.textView_parking_name);
+			viewHolder.avaiblePlacesView = (TextView) convertView.findViewById(R.id.textView_available_places);
+				
+			viewHolder.parkingLogo = (ImageView) convertView.findViewById(R.id.imageView_parking_logo);
+				
+			viewHolder.favoriteLogo = (ImageView) convertView.findViewById(R.id.imageView_favorite);		
+				
+			convertView.setTag(viewHolder);
+		} else {
+			viewHolder = (ViewHolderItem) convertView.getTag();
 		}
 		
 		final Parking parking = this.parkingList.get(position);
-		
-		if(parking != null){
-			TextView parkingName = (TextView) view.findViewById(R.id.textView_parking_name);
-			TextView avaiblePlaces = (TextView) view.findViewById(R.id.textView_available_places);
-			if(parkingName != null){
-				parkingName.setText(parking.getName());
-			}
-			if(avaiblePlaces != null){
-				avaiblePlaces.setText(String.valueOf(parking.getAvaiblePlaces()+" / "+parking.getFullPlaces()));
-			}
+		if(parking != null){	
+			viewHolder.parkingNameView.setText(parking.getName());
+			viewHolder.avaiblePlacesView.setText(String.valueOf(parking.getAvaiblePlaces()+" / "+parking.getFullPlaces()));
+			
 			if(parking.getStatus() == Status.CLOSE){
-				ImageView image = (ImageView) view.findViewById(R.id.imageView_parking_logo);
-				image.setImageBitmap(BitmapFactory.decodeResource(this.resources, R.drawable.parking_close));
+				viewHolder.parkingLogo.setImageBitmap(BitmapFactory.decodeResource(this.resources, R.drawable.parking_close));
 			}
 			
-			ImageView image = (ImageView) view.findViewById(R.id.imageView_favorite);
 			if(parking.isFavorite()){
-				image.setImageBitmap(BitmapFactory.decodeResource(this.resources, android.R.drawable.star_big_on));
+				viewHolder.favoriteLogo.setImageBitmap(BitmapFactory.decodeResource(this.resources, android.R.drawable.star_big_on));
 			}
-			image.setOnClickListener(new CustomClickListener(parking, image,this.resources, this.getContext()));
-			Log.d("LIST_ADAPTER", Boolean.toString(parking.isFavorite()));
+			viewHolder.favoriteLogo.setOnClickListener(new CustomClickListener(parking, viewHolder.favoriteLogo,this.resources, this.getContext()));
 			
+			Log.d("LIST_ADAPTER", Boolean.toString(parking.isFavorite()));
 		}
-		return view;
+		
+		return convertView;
 	}
 }

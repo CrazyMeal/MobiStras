@@ -4,19 +4,15 @@ import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-import com.crazymeal.mobistras.MainService;
 import com.crazymeal.mobistras.ParkingDatabase;
 import com.crazymeal.mobistras.ParkingMapAdapter;
 import com.crazymeal.mobistras.R;
@@ -36,22 +32,10 @@ public class ParkingListActivity extends Activity{
 	private String jsonLocationString, jsonParkingString;
 	private boolean mBound;
 	
-	private ServiceConnection mConnection;
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list);
-		
-		this.mConnection= new ServiceConnection() {
-			public void onServiceConnected(ComponentName className, IBinder service) {
-				setmBound(true);
-			}
-
-			public void onServiceDisconnected(ComponentName className) {
-				setmBound(false);
-			}
-		};
 		
 		this.locationParser = new JsonLocationParser();
 		this.parkingParser = new JsonParkingParser();
@@ -71,17 +55,6 @@ public class ParkingListActivity extends Activity{
 			} catch (ExecutionException e) {
 				e.printStackTrace();
 			}
-		}
-	}
-	
-	@Override
-	protected void onStart() {
-		super.onStart();
-		try {
-			startService(new Intent(ParkingListActivity.this, MainService.class));
-			bindService(new Intent(this, MainService.class), mConnection, Context.BIND_AUTO_CREATE);
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 

@@ -1,7 +1,20 @@
 package com.crazymeal.mobistras.activities;
 
+import java.util.Calendar;
+
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.RemoteException;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -13,6 +26,7 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import com.crazymeal.mobistras.R;
+import com.crazymeal.mobistras.alarms.SimpleAlarm;
 
 public class AlarmProgrammingActivity extends Activity{
 	private Button validateButton;
@@ -65,7 +79,7 @@ public class AlarmProgrammingActivity extends Activity{
 		if(this.isRecurrentCheckbox.isChecked()){
 			
 		} else {
-			
+
 		}
 	}
 }

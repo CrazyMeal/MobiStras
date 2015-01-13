@@ -30,6 +30,9 @@ public class CustomClickListener implements OnClickListener{
 		
 		ParkingDatabase db = new ParkingDatabase(this.context);
 		db.setParkingFavorite(this.parking);
+		for(Parking p : db.getAllAsList()){
+			Log.d("VERIF",p.getName() + "> " +p.getStatus().toString());
+		}
 		db.close();
 		
 		if(this.parking.isFavorite())
