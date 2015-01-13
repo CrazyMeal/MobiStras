@@ -62,7 +62,7 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		this.getMenuInflater().inflate(R.menu.activity_main, menu);
+		this.getMenuInflater().inflate(R.menu.activity_parking_list, menu);
 		return true;
 	}
 

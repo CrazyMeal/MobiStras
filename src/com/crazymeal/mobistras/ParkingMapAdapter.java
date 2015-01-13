@@ -16,8 +16,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.crazymeal.alarms.DetailedParkingActivity;
-import com.crazymeal.alarms.CustomClickListener;
+import com.crazymeal.detailed.CustomClickListener;
+import com.crazymeal.detailed.DetailedParkingActivity;
 import com.crazymeal.model.Parking;
 import com.crazymeal.model.Status;
 
@@ -56,8 +56,8 @@ public class ParkingMapAdapter extends ArrayAdapter<com.crazymeal.model.Parking>
 				ImageView image = (ImageView) view.findViewById(R.id.imageView_parking_logo);
 				image.setImageBitmap(BitmapFactory.decodeResource(this.resources, R.drawable.parking_close));
 			}
-			final ImageView image = (ImageView) view.findViewById(R.id.imageView_favorite);
 			
+			final ImageView image = (ImageView) view.findViewById(R.id.imageView_favorite);
 			image.setOnClickListener(new OnClickListener() {
 				private boolean isFavorite = false;
 				@Override

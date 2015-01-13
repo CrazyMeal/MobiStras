@@ -1,4 +1,4 @@
-package com.crazymeal.alarms;
+package com.crazymeal.detailed;
 
 import com.crazymeal.model.Parking;
 

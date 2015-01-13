@@ -1,4 +1,4 @@
-package com.crazymeal.alarms;
+package com.crazymeal.detailed;
 
 import java.util.Calendar;
 

@@ -8,11 +8,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
 import com.crazymeal.asynctasks.JsonDownloadTask;
 import com.crazymeal.database.ParkingDatabase;
+import com.crazymeal.detailed.DetailedParkingActivity;
 import com.crazymeal.model.Parking;
 import com.crazymeal.parsers.JsonLocationParser;
 import com.crazymeal.parsers.JsonParkingParser;
@@ -44,7 +47,6 @@ public class ParkingListActivity extends Activity{
 			this.jsonParkingTask.execute(new String[]{getString(R.string.urlParking)});
 		
 			try {
-				
 				this.jsonLocationString = this.jsonLocationTask.get();
 				this.jsonParkingString = this.jsonParkingTask.get();
 			} catch (InterruptedException e) {
@@ -53,20 +55,25 @@ public class ParkingListActivity extends Activity{
 				e.printStackTrace();
 			}
 		}
-	}	
-	/*
+	}
+	
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		if(requestCode == 1){
-			if(resultCode == RESULT_OK){
-				int hour = data.getIntExtra("hour", 0);
-				int minute = data.getIntExtra("minute", 0);
-				String recurrence = data.getStringExtra("recurrence");
-			}
+	public boolean onCreateOptionsMenu(Menu menu) {
+		this.getMenuInflater().inflate(R.menu.activity_parking_list, menu);
+		return true;
+	}
+
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.menu_settings:
+			startActivity(new Intent(ParkingListActivity.this, DetailedParkingActivity.class));
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
 		}
 	}
-*/
 
 
 	public class AsyncTaskListener{
