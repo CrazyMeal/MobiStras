@@ -1,30 +1,42 @@
 package com.crazymeal.detailed;
 
-import com.crazymeal.model.Parking;
-
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
+
+import com.crazymeal.database.ParkingDatabase;
+import com.crazymeal.model.Parking;
 
 public class CustomClickListener implements OnClickListener{
-	private Context context;
 	private Parking parking;
-	private Activity originActivity;
-	private static int REQUEST_DETAILS = 1;
+	private ImageView image;
+	private Resources resources;
+	private Context context;
 	
-	public CustomClickListener(Activity originactivity, Context context, Parking parking){
-		this.context = context;
-		this.originActivity = originactivity;
+	public CustomClickListener(Parking parking, ImageView image, Resources resources, Context context){
 		this.parking = parking;
+		this.image = image;
+		this.resources = resources;
+		this.context = context;
 	}
 	@Override
 	public void onClick(View v) {
-		Intent intent = new Intent(this.context, DetailedParkingActivity.class);
-		intent.putExtra("parkingName", this.parking.getName());
-		this.originActivity.startActivity(intent);
-		//this.originActivity.startActivityForResult(intent, CustomClickListener.REQUEST_DETAILS);
+		this.parking.setFavorite(!this.parking.isFavorite());
+		
+		Log.d("FAVORITE_CLICK", "Set parking favorite to " + this.parking.isFavorite());
+		
+		ParkingDatabase db = new ParkingDatabase(this.context);
+		db.setParkingFavorite(this.parking);
+		db.close();
+		
+		if(this.parking.isFavorite())
+			this.image.setImageBitmap(BitmapFactory.decodeResource(this.resources, android.R.drawable.star_big_on));
+		else
+			this.image.setImageBitmap(BitmapFactory.decodeResource(this.resources, android.R.drawable.star_big_off));
 	}
 	
 }

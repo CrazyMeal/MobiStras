@@ -70,7 +70,7 @@ public class ParkingDatabase extends SQLiteOpenHelper{
 	public void updateParkings(HashMap<Integer, Parking> parkings){
 		SQLiteDatabase db = this.getWritableDatabase();
 		for(Parking p : parkings.values()){
-			db.update(TABLE_NAME, p.getAsContentValues(), "id=?", new String[] {String.valueOf(p.getId())});
+			db.update(TABLE_NAME, p.getAsContentValuesWithoutFavorite(), "id=?", new String[] {String.valueOf(p.getId())});
 			Log.d("DATABASE_SQL", "Updated parking");
 		}
 		db.close();
@@ -87,7 +87,7 @@ public class ParkingDatabase extends SQLiteOpenHelper{
 
 	public ArrayList<Parking> getAllAsList() {
 		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor c = db.rawQuery ("SELECT * FROM " + 	TABLE_NAME + " ORDER BY " + PARKING_STATUS, null);
+		Cursor c = db.rawQuery ("SELECT * FROM " + 	TABLE_NAME + " ORDER BY " + PARKING_FAVORITE +" DESC", null);
 		if (c == null) {
 		   db.close();
 		   return null;
@@ -101,7 +101,12 @@ public class ParkingDatabase extends SQLiteOpenHelper{
 		return all;
 
 	}
-
+	public void setParkingFavorite(Parking p){
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.update(TABLE_NAME, p.getAsContentValues(), "id=?", new String[] {String.valueOf(p.getId())});
+		Log.d("DATABASE_SQL", "Updated favorite value to " + p.isFavorite());
+		db.close();
+	}
 	public void clear() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		db.execSQL("DROP TABLE IF EXISTS "+ DATABASE_NAME);

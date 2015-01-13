@@ -1,12 +1,9 @@
 package com.crazymeal.model;
 
-import org.json.simple.JSONAware;
-import org.json.simple.JSONObject;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 
-public class Parking implements JSONAware {
+public class Parking {
 	private int id, avaiblePlaces, fullPlaces;
 	private double longitude, latitude;
 	private String name;
@@ -84,20 +81,18 @@ public class Parking implements JSONAware {
 		return cv;
 	}
 	
-	@SuppressWarnings("unchecked")
-	@Override
-	public String toJSONString() {
-		JSONObject obj = new JSONObject();
-		obj.put("id", this.id);
-	    obj.put("name", this.name);
-	    obj.put("avaiblePlaces", this.avaiblePlaces);
-	    obj.put("fullPlaces", this.fullPlaces);
-	    obj.put("longitude", this.longitude);
-	    obj.put("latitude", this.latitude);
-	    obj.put("status", this.status);
-	    return obj.toString();
-
+	public ContentValues getAsContentValuesWithoutFavorite(){
+		ContentValues cv = new ContentValues();
+		cv.put("id",this.id);
+		cv.put("name",this.name);
+		cv.put("avaible",this.avaiblePlaces);
+		cv.put("full",this.fullPlaces);
+		cv.put("status",this.getStringStatus());
+		cv.put("longitude",this.longitude);
+		cv.put("latitude",this.latitude);
+		return cv;
 	}
+	
 	public String toString(){
 		StringBuffer sb = new StringBuffer();
 		sb.append("Parking(" + this.id + "): " + this.name + "\n");
@@ -132,6 +127,9 @@ public class Parking implements JSONAware {
 	public void setId(int id){
 		this.id = id;
 	}
+	public void setFavorite(boolean favorite){
+		this.favorite = favorite;
+	}
 	public int getAvaiblePlaces() {
 		return avaiblePlaces;
 	}
@@ -151,7 +149,9 @@ public class Parking implements JSONAware {
 	public String getName() {
 		return name;
 	}
-
+	public boolean isFavorite(){
+		return this.favorite;
+	}
 	public Status getStatus() {
 		return status;
 	}

@@ -105,7 +105,6 @@ public class ParkingListActivity extends Activity{
 				HashMap<Integer, Parking> finalMap = Util.merge(parkingMap, locationMap);
 				
 				ParkingDatabase db = new ParkingDatabase(this.context);
-				db.clear();
 				if(db.isEmpty()){
 					db.addParkings(finalMap);
 				}

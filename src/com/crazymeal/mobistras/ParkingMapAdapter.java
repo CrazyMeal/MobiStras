@@ -4,20 +4,17 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.crazymeal.detailed.CustomClickListener;
-import com.crazymeal.detailed.DetailedParkingActivity;
 import com.crazymeal.model.Parking;
 import com.crazymeal.model.Status;
 
@@ -57,19 +54,12 @@ public class ParkingMapAdapter extends ArrayAdapter<com.crazymeal.model.Parking>
 				image.setImageBitmap(BitmapFactory.decodeResource(this.resources, R.drawable.parking_close));
 			}
 			
-			final ImageView image = (ImageView) view.findViewById(R.id.imageView_favorite);
-			image.setOnClickListener(new OnClickListener() {
-				private boolean isFavorite = false;
-				@Override
-				public void onClick(View v) {
-					if(!this.isFavorite)
-						image.setImageBitmap(BitmapFactory.decodeResource(resources, android.R.drawable.star_big_on));
-					else
-						image.setImageBitmap(BitmapFactory.decodeResource(resources, android.R.drawable.star_big_off));
-					
-					this.isFavorite = !this.isFavorite;
-				}
-			});
+			ImageView image = (ImageView) view.findViewById(R.id.imageView_favorite);
+			image.setOnClickListener(new CustomClickListener(parking, image,this.resources, this.getContext()));
+			Log.d("LIST_ADAPTER", Boolean.toString(parking.isFavorite()));
+			if(parking.isFavorite()){
+				image.setImageBitmap(BitmapFactory.decodeResource(this.resources, android.R.drawable.star_big_on));
+			}
 		}
 		return view;
 	}
