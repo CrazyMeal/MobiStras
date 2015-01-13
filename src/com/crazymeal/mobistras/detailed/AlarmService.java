@@ -1,4 +1,4 @@
-package com.crazymeal.detailed;
+package com.crazymeal.mobistras.detailed;
 
 import java.util.Calendar;
 

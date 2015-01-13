@@ -13,15 +13,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.crazymeal.detailed.CustomClickListener;
-import com.crazymeal.model.Parking;
-import com.crazymeal.model.Status;
+import com.crazymeal.mobistras.detailed.CustomClickListener;
+import com.crazymeal.mobistras.model.Parking;
+import com.crazymeal.mobistras.model.Status;
 
-public class ParkingMapAdapter extends ArrayAdapter<com.crazymeal.model.Parking>{
-	private ArrayList<com.crazymeal.model.Parking> parkingList;
+public class ParkingMapAdapter extends ArrayAdapter<com.crazymeal.mobistras.model.Parking>{
+	private ArrayList<com.crazymeal.mobistras.model.Parking> parkingList;
 	private Resources resources;
 	
-	public ParkingMapAdapter(Context context, Resources resources, int textViewRessourceId, ArrayList<com.crazymeal.model.Parking> parkingList){
+	public ParkingMapAdapter(Context context, Resources resources, int textViewRessourceId, ArrayList<com.crazymeal.mobistras.model.Parking> parkingList){
 		super(context, textViewRessourceId, parkingList);
 		this.parkingList = parkingList;
 		this.resources = resources;

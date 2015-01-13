@@ -21,10 +21,10 @@ import com.crazymeal.mobistras.R.layout;
 import com.crazymeal.mobistras.R.menu;
 import com.crazymeal.mobistras.R.string;
 import com.crazymeal.mobistras.asynctasks.JsonDownloadTask;
-import com.crazymeal.model.Parking;
-import com.crazymeal.parsers.JsonLocationParser;
-import com.crazymeal.parsers.JsonParkingParser;
-import com.crazymeal.util.Util;
+import com.crazymeal.mobistras.model.Parking;
+import com.crazymeal.mobistras.parsers.JsonLocationParser;
+import com.crazymeal.mobistras.parsers.JsonParkingParser;
+import com.crazymeal.mobistras.util.Util;
 
 public class ParkingListActivity extends Activity{
 	private ParkingMapAdapter adapter;

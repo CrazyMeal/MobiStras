@@ -1,4 +1,4 @@
-package com.crazymeal.model;
+package com.crazymeal.mobistras.model;
 
 import android.content.ContentValues;
 import android.database.Cursor;

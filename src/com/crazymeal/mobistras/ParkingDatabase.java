@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.crazymeal.model.Parking;
+import com.crazymeal.mobistras.model.Parking;
 
 public class ParkingDatabase extends SQLiteOpenHelper{
 	public static final int DATABASE_VERSION = 1;
