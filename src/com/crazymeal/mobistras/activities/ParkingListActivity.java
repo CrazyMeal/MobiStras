@@ -4,22 +4,22 @@ import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
+import com.crazymeal.mobistras.MainService;
 import com.crazymeal.mobistras.ParkingDatabase;
 import com.crazymeal.mobistras.ParkingMapAdapter;
 import com.crazymeal.mobistras.R;
-import com.crazymeal.mobistras.R.id;
-import com.crazymeal.mobistras.R.layout;
-import com.crazymeal.mobistras.R.menu;
-import com.crazymeal.mobistras.R.string;
 import com.crazymeal.mobistras.asynctasks.JsonDownloadTask;
 import com.crazymeal.mobistras.model.Parking;
 import com.crazymeal.mobistras.parsers.JsonLocationParser;
@@ -34,12 +34,24 @@ public class ParkingListActivity extends Activity{
 	private JsonParkingParser parkingParser;
 	private JsonDownloadTask jsonLocationTask, jsonParkingTask;
 	private String jsonLocationString, jsonParkingString;
+	private boolean mBound;
 	
+	private ServiceConnection mConnection;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list);
+		
+		this.mConnection= new ServiceConnection() {
+			public void onServiceConnected(ComponentName className, IBinder service) {
+				setmBound(true);
+			}
+
+			public void onServiceDisconnected(ComponentName className) {
+				setmBound(false);
+			}
+		};
 		
 		this.locationParser = new JsonLocationParser();
 		this.parkingParser = new JsonParkingParser();
@@ -63,6 +75,17 @@ public class ParkingListActivity extends Activity{
 	}
 	
 	@Override
+	protected void onStart() {
+		super.onStart();
+		try {
+			startService(new Intent(ParkingListActivity.this, MainService.class));
+			bindService(new Intent(this, MainService.class), mConnection, Context.BIND_AUTO_CREATE);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		this.getMenuInflater().inflate(R.menu.activity_parking_list, menu);
 		return true;
@@ -73,7 +96,7 @@ public class ParkingListActivity extends Activity{
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_settings:
-			startActivity(new Intent(ParkingListActivity.this, DetailedParkingActivity.class));
+			startActivity(new Intent(ParkingListActivity.this, AlarmProgrammingActivity.class));
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -121,5 +144,13 @@ public class ParkingListActivity extends Activity{
 				listView.setVisibility(View.VISIBLE);
 			}
 		}	
+	}
+
+	public boolean ismBound() {
+		return mBound;
+	}
+
+	public void setmBound(boolean mBound) {
+		this.mBound = mBound;
 	}
 }

@@ -1,9 +1,5 @@
 package com.crazymeal.mobistras.activities;
 
-import com.crazymeal.mobistras.R;
-import com.crazymeal.mobistras.R.id;
-import com.crazymeal.mobistras.R.layout;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +10,8 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
+
+import com.crazymeal.mobistras.R;
 
 public class SplashActivity extends Activity {
 	

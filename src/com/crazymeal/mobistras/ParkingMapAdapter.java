@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.crazymeal.mobistras.detailed.CustomClickListener;
 import com.crazymeal.mobistras.model.Parking;
 import com.crazymeal.mobistras.model.Status;
 

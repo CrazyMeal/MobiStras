@@ -14,7 +14,7 @@ import android.widget.TimePicker;
 
 import com.crazymeal.mobistras.R;
 
-public class DetailedParkingActivity extends Activity{
+public class AlarmProgrammingActivity extends Activity{
 	private Button validateButton;
 	private TimePicker timePicker;
 	private Spinner spinner;

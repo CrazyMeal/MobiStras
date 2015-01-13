@@ -1,10 +1,6 @@
 package com.crazymeal.mobistras.activities;
 
 
-import com.crazymeal.mobistras.MainService;
-import com.crazymeal.mobistras.R;
-import com.crazymeal.mobistras.R.menu;
-
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -18,9 +14,10 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Messenger;
 import android.view.Menu;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
+
+import com.crazymeal.mobistras.MainService;
+import com.crazymeal.mobistras.R;
 
 public class MainActivity extends Activity {
 
