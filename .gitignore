@@ -215,3 +215,4 @@ pip-log.txt
 .mr.developer.cfg
 /gen
 gen/
+gen/com/crazymeal/mobistras/
