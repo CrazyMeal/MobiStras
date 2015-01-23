@@ -38,6 +38,7 @@
             android:parentActivityName="com.crazymeal.mobistras.activities.ParkingListActivity" >
             ></activity>
         <service android:name="com.crazymeal.mobistras.activities.MainService"/>
+        <receiver android:name="com.crazymeal.mobistras.alarms.AlarmReceiver"></receiver>
     </application>
 	
 </manifest>

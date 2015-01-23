@@ -3,7 +3,7 @@ package com.crazymeal.mobistras.activities;
 
 import java.util.Calendar;
 
-import com.crazymeal.mobistras.alarms.SimpleAlarm;
+import com.crazymeal.mobistras.alarms.AlarmReceiver;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -41,7 +41,7 @@ public class MainService extends Service{
 			
 			AlarmManager am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 			
-			Intent intent = new Intent(MainService.this, SimpleAlarm.class);
+			Intent intent = new Intent(MainService.this, AlarmReceiver.class);
 			
 			int random = (int)(Math.random() * 10) + 9;
 			PendingIntent pendingIntent = PendingIntent.getBroadcast(MainService.this, random,intent,PendingIntent.FLAG_ONE_SHOT);

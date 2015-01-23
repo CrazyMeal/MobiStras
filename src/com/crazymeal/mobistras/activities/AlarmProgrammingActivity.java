@@ -5,15 +5,9 @@ import java.util.Calendar;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.os.Message;
-import android.os.Messenger;
-import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,7 +20,7 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import com.crazymeal.mobistras.R;
-import com.crazymeal.mobistras.alarms.SimpleAlarm;
+import com.crazymeal.mobistras.alarms.AlarmReceiver;
 
 public class AlarmProgrammingActivity extends Activity{
 	private Button validateButton;
@@ -47,8 +41,7 @@ public class AlarmProgrammingActivity extends Activity{
 		this.validateButton.setOnClickListener(new OnClickListener() {	
 			@Override
 			public void onClick(View v) {
-				if(!isRecurrentCheckbox.isChecked())
-					programSimpleAlarm(timePicker.getCurrentHour(), timePicker.getCurrentMinute());
+				programSimpleAlarm(timePicker.getCurrentHour(), timePicker.getCurrentMinute());
 				finish();
 			}
 		});
@@ -79,7 +72,21 @@ public class AlarmProgrammingActivity extends Activity{
 		if(this.isRecurrentCheckbox.isChecked()){
 			
 		} else {
-
+			Calendar AlarmCal = Calendar.getInstance();
+			AlarmCal.setTimeInMillis(System.currentTimeMillis());
+			AlarmCal.set(Calendar.HOUR_OF_DAY, hour);
+			AlarmCal.set(Calendar.MINUTE, min);
+			AlarmCal.set(Calendar.SECOND, 0);
+			
+			AlarmManager am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+			
+			Intent intent = new Intent(AlarmProgrammingActivity.this, AlarmReceiver.class);
+			
+			int random = (int)(Math.random() * 10) + 9;
+			PendingIntent pendingIntent = PendingIntent.getBroadcast(AlarmProgrammingActivity.this, random,intent,PendingIntent.FLAG_ONE_SHOT);
+			am.set(AlarmManager.RTC_WAKEUP,AlarmCal.getTimeInMillis(),pendingIntent);
+			
+			Log.d("SIMPLE_ALARM", "Alarm programmed");
 		}
 	}
 }
