@@ -27,6 +27,7 @@ public class AlarmProgrammingActivity extends Activity{
 	private TimePicker timePicker;
 	private Spinner spinner;
 	private CheckBox isRecurrentCheckbox;
+	private AlarmManager am;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +36,15 @@ public class AlarmProgrammingActivity extends Activity{
 		
 		this.spinner = (Spinner) findViewById(R.id.spinner_recurrence);
 		
+		this.am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+		
 		this.timePicker = (TimePicker)findViewById(R.id.timePicker);
 		
 		this.validateButton = (Button)findViewById(R.id.button_validate_alarm);
 		this.validateButton.setOnClickListener(new OnClickListener() {	
 			@Override
 			public void onClick(View v) {
-				programSimpleAlarm(timePicker.getCurrentHour(), timePicker.getCurrentMinute());
+				programAlarm(timePicker.getCurrentHour(), timePicker.getCurrentMinute());
 				finish();
 			}
 		});
@@ -68,8 +71,21 @@ public class AlarmProgrammingActivity extends Activity{
 	}
 
 
-	private void programSimpleAlarm(int hour, int min){
+	private void programAlarm(int hour, int min){
 		if(this.isRecurrentCheckbox.isChecked()){
+			this.am = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+			Intent intent = new Intent(this, AlarmReceiver.class);
+			PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+
+			// Set the alarm to start at 8:30 a.m.
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTimeInMillis(System.currentTimeMillis());
+			calendar.set(Calendar.HOUR_OF_DAY, hour);
+			calendar.set(Calendar.MINUTE, min);
+
+			this.am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+			        1000 * 1 * 1, alarmIntent);
+			Log.d("SIMPLE_ALARM", "Alarm programmed " + hour + ":" + min);
 			
 		} else {
 			Calendar AlarmCal = Calendar.getInstance();
@@ -78,13 +94,11 @@ public class AlarmProgrammingActivity extends Activity{
 			AlarmCal.set(Calendar.MINUTE, min);
 			AlarmCal.set(Calendar.SECOND, 0);
 			
-			AlarmManager am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-			
 			Intent intent = new Intent(AlarmProgrammingActivity.this, AlarmReceiver.class);
 			
 			int random = (int)(Math.random() * 10) + 9;
 			PendingIntent pendingIntent = PendingIntent.getBroadcast(AlarmProgrammingActivity.this, random,intent,PendingIntent.FLAG_ONE_SHOT);
-			am.set(AlarmManager.RTC_WAKEUP,AlarmCal.getTimeInMillis(),pendingIntent);
+			this.am.set(AlarmManager.RTC_WAKEUP,AlarmCal.getTimeInMillis(),pendingIntent);
 			
 			Log.d("SIMPLE_ALARM", "Alarm programmed");
 		}
