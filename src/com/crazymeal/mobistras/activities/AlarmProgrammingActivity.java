@@ -10,6 +10,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -30,19 +31,9 @@ public class AlarmProgrammingActivity extends Activity{
 	private Spinner spinner;
 	private CheckBox isRecurrentCheckbox;
 	
-	private Messenger mService = null;
-	private boolean mBound;
-	private ServiceConnection mConnection = new ServiceConnection() {
-		public void onServiceConnected(ComponentName className, IBinder service) {
-			mService = new Messenger(service);
-			mBound = true;
-		}
-
-		public void onServiceDisconnected(ComponentName className) {
-			mService = null;
-			mBound = false;
-		}
-	};
+	private Messenger serviceMessenger;
+	private boolean serviceBinded;
+	private ServiceConnection mConnection;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +50,12 @@ public class AlarmProgrammingActivity extends Activity{
 			public void onClick(View v) {
 				try {
 					Message message = Message.obtain();
-					message.obj = new AlarmInfos(timePicker.getCurrentHour(),timePicker.getCurrentMinute(), isRecurrentCheckbox.isChecked());
-					
-					mService.send(message);
+					AlarmInfos infos = new AlarmInfos(timePicker.getCurrentHour(),timePicker.getCurrentMinute(), isRecurrentCheckbox.isChecked());
+					if(isRecurrentCheckbox.isChecked()){
+						infos.setReccurencyDay((int) spinner.getSelectedItemId());
+					}
+					message.obj = infos;
+					serviceMessenger.send(message);
 				} catch (RemoteException e) {
 					e.printStackTrace();
 				} finally {
@@ -80,6 +74,18 @@ public class AlarmProgrammingActivity extends Activity{
 					findViewById(R.id.layout_recurrence).setVisibility(View.GONE);
 			}
 		});
+		
+		this.mConnection = new ServiceConnection() {
+			public void onServiceConnected(ComponentName className, IBinder service) {
+				serviceMessenger = new Messenger(service);
+				serviceBinded = true;
+			}
+
+			public void onServiceDisconnected(ComponentName className) {
+				serviceMessenger = null;
+				serviceBinded = false;
+			}
+		};
 	}
 	
 	@Override
@@ -96,9 +102,9 @@ public class AlarmProgrammingActivity extends Activity{
 	@Override
 	protected void onStop() {
 		super.onStop();
-		if (mBound) {
+		if (serviceBinded) {
 			unbindService(mConnection);
-			mBound = false;
+			serviceBinded = false;
 		}
 	}
 }

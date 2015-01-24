@@ -14,13 +14,12 @@ public class AlarmProgrammingHandler extends Handler{
 	private AlarmManager am;
 	private Context baseContext;
 	private Calendar calendar;
-	private Intent alarmIntent;
 	
 	public AlarmProgrammingHandler(AlarmManager am, Context baseContext) {
 		this.am = am;
 		this.baseContext = baseContext;
 		this.calendar = Calendar.getInstance();
-		this.alarmIntent = new Intent(this.baseContext, AlarmReceiver.class);
+		
 	}
 
 	@Override
@@ -32,14 +31,18 @@ public class AlarmProgrammingHandler extends Handler{
 		this.calendar.set(Calendar.SECOND, 0);
 		
 		int random = (int)(Math.random() * 10) + 9;
-		
-		
+
 		if(infos.isRecurrent()){
-			PendingIntent pendingIntent = PendingIntent.getBroadcast(this.baseContext, 0, this.alarmIntent, 0);
-			this.am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 1 * 1, pendingIntent);
+			Intent alarmIntent = new Intent(this.baseContext, AlarmReceiver.class);
+			alarmIntent.putExtra("day", infos.getReccurencyDay());
+			Log.d("SIMPLE_ALARM", "Handler program day to> " + String.valueOf(infos.getReccurencyDay()));
+			
+			PendingIntent pendingIntent = PendingIntent.getBroadcast(this.baseContext, 0, alarmIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+			this.am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 60 * 24, pendingIntent);
 			Log.d("SIMPLE_ALARM", "Programmed repeating alarm to> " + infos.getHour() + ":" + infos.getMinutes());
 		} else {
-			PendingIntent pendingIntent = PendingIntent.getBroadcast(this.baseContext, random, this.alarmIntent, PendingIntent.FLAG_ONE_SHOT);
+			Intent alarmIntent = new Intent(this.baseContext, AlarmReceiver.class);
+			PendingIntent pendingIntent = PendingIntent.getBroadcast(this.baseContext, random, alarmIntent, PendingIntent.FLAG_ONE_SHOT);
 			this.am.set(AlarmManager.RTC_WAKEUP, this.calendar.getTimeInMillis(), pendingIntent);
 			Log.d("SIMPLE_ALARM", "Programmed one shot alarm to> "  + infos.getHour() + ":" + infos.getMinutes());
 		}
