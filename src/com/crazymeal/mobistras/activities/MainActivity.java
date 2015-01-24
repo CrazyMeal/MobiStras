@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.widget.Button;
 
 import com.crazymeal.mobistras.R;
+import com.crazymeal.mobistras.alarms.AlarmService;
 
 public class MainActivity extends Activity {
 
@@ -43,7 +44,7 @@ public class MainActivity extends Activity {
 		//setContentView(R.layout.activity_main);
 		
 		try {
-			Intent intent = new Intent(MainActivity.this, MainService.class);
+			Intent intent = new Intent(MainActivity.this, AlarmService.class);
 			startService(intent);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -69,7 +70,7 @@ public class MainActivity extends Activity {
 	@Override
 	public void onStart() {
 		super.onStart();
-		bindService(new Intent(this, MainService.class), mConnection,
+		bindService(new Intent(this, AlarmService.class), mConnection,
 				Context.BIND_AUTO_CREATE);
 
 		final String PREFS_NAME = "MyPrefsFile";
