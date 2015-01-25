@@ -42,6 +42,7 @@ public class AlarmProgrammingHandler extends Handler{
 			Log.d("SIMPLE_ALARM", "Programmed repeating alarm to> " + infos.getHour() + ":" + infos.getMinutes());
 		} else {
 			Intent alarmIntent = new Intent(this.baseContext, AlarmReceiver.class);
+			alarmIntent.putExtra("day", 0);
 			PendingIntent pendingIntent = PendingIntent.getBroadcast(this.baseContext, random, alarmIntent, PendingIntent.FLAG_ONE_SHOT);
 			this.am.set(AlarmManager.RTC_WAKEUP, this.calendar.getTimeInMillis(), pendingIntent);
 			Log.d("SIMPLE_ALARM", "Programmed one shot alarm to> "  + infos.getHour() + ":" + infos.getMinutes());
