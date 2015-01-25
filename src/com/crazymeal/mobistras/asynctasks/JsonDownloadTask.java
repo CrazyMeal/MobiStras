@@ -23,6 +23,11 @@ public class JsonDownloadTask extends AsyncTask<String,Void, String>{
 		this.hasBeenExecuted = false;
 	}
 	
+	public JsonDownloadTask(){
+		this.listener = null;
+		this.hasBeenExecuted = false;
+	}
+	
 	@Override
 	protected String doInBackground(String... params) {
 		URL url;
@@ -55,7 +60,9 @@ public class JsonDownloadTask extends AsyncTask<String,Void, String>{
 	 @Override
 	 protected void onPostExecute(String result) {
 		 this.hasBeenExecuted = true;
-		 this.listener.notify(this);
+		 if(this.listener != null){
+			 this.listener.notify(this);
+		 }
 	   }
 
 	public boolean isHasBeenExecuted() {
