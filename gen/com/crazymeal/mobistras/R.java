@@ -53,7 +53,6 @@ public final class R {
         public static final int content_description_logo_map=0x7f05000e;
         public static final int content_description_parking_logo=0x7f05000d;
         public static final int description_image_parking_open=0x7f050003;
-        public static final int hello_world=0x7f050014;
         public static final int menu_settings=0x7f050001;
         public static final int text_alarm_infos=0x7f050009;
         public static final int text_available_places=0x7f05000a;
