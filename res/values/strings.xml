@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MobiStras</string>
+    <string name="app_name">StrasAndPark</string>
     <string name="menu_settings">Gérer la programmation</string>
     <string name="text_button_preferences">Préférences</string>
     <string name="description_image_parking_open">Image parking ouvert</string>
