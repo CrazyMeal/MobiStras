@@ -108,7 +108,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 							Log.d("SIMPLE_ALARM", "parking with id "+ newParking.getId() + " has " + newParking.getAvaiblePlaces() + " places");
 							switch (newParking.getStatus()) {
 							case CLOSE:
-								sb.append(parkingEntry.getValue() + " est fermé");
+								sb.append(parkingEntry.getValue() + " est fermÃ©");
 								break;
 							case FULL:
 								sb.append(parkingEntry.getValue() + " est complet");

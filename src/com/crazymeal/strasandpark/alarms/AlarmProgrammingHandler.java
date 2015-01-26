@@ -34,7 +34,7 @@ public class AlarmProgrammingHandler extends Handler{
 		switch (msg.arg1) {
 		case 0:
 			this.toggleReceiverActivation(false);
-			Toast.makeText(this.baseContext, "Vérification désactivée", Toast.LENGTH_LONG).show();
+			Toast.makeText(this.baseContext, this.baseContext.getString(R.string.toast_text_canceled_alarm), Toast.LENGTH_LONG).show();
 			Log.d("SIMPLE_ALARM", "Alarm receiver disabled");
 			break;
 			
@@ -76,7 +76,7 @@ public class AlarmProgrammingHandler extends Handler{
 				
 				Log.d("SIMPLE_ALARM", "Programmed one shot alarm to> "  + infos.getHour() + ":" + infos.getMinutes());
 			}
-			Toast.makeText(this.baseContext, "Vérification programmée", Toast.LENGTH_LONG).show();
+			Toast.makeText(this.baseContext, this.baseContext.getString(R.string.toast_text_programmed_alarm), Toast.LENGTH_LONG).show();
 			break;
 		default:
 			break;
