@@ -3,8 +3,6 @@
 
     <string name="app_name">StrasAndPark</string>
     <string name="menu_settings">Gérer la programmation</string>
-    <string name="text_button_preferences">Préférences</string>
-    <string name="description_image_parking_open">Image parking ouvert</string>
     <string name="urlLocation">http://carto.strasmap.eu/remote.amf.json/Parking.geometry</string>
     <string name="urlParking">http://carto.strasmap.eu/remote.amf.json/Parking.status</string>
     <string name="text_recurrence">Récurrence:</string>
@@ -12,14 +10,10 @@
     <string name="text_button_validate_alarm">Valider</string>
     <string name="text_alarm_infos">Programmez une alarme afin de vérifier le nombre de place disponible pour vos favoris</string>
     <string name="text_available_places">Places disponibles:</string>
-    <string name="text_full_places">Total des places</string>
-    <string name="text_navigate_to">Naviguer vers ce parking</string>
     <string name="content_description_parking_logo">Logo_parking</string>
     <string name="content_description_logo_map">Logo_map</string>
-    <string name="text_programmed_alarms">Alertes programmées:</string>
-    <string name="text_detailed_alarms">Alarme programmée:</string>
+    <string name="description_image_parking_open">Image parking ouvert</string>
     <string name="text_detailed_isreccurent">Alarme récurrente</string>
     <string name="content_description_favorite">favorite_logo</string>
-    <string name="title_activity_notification_landing">NotificationLandingActivity</string>
 
 </resources>
