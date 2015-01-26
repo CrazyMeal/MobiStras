@@ -4,10 +4,17 @@ import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,27 +42,50 @@ public class ParkingListActivity extends Activity{
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.list);
 		
-		this.locationParser = new JsonLocationParser();
-		this.parkingParser = new JsonParkingParser();
-		this.listener = new AsyncTaskListener(this.getBaseContext(), this.locationParser, this.parkingParser);
-		
-		this.jsonLocationTask = new JsonDownloadTask(this.listener);
-		this.jsonParkingTask = new JsonDownloadTask(this.listener);
-		if(!this.jsonLocationTask.isHasBeenExecuted() && !jsonParkingTask.isHasBeenExecuted()){
-			this.jsonLocationTask.execute(new String[]{getString(R.string.urlLocation)});
-			this.jsonParkingTask.execute(new String[]{getString(R.string.urlParking)});
-		
-			try {
-				this.jsonLocationString = this.jsonLocationTask.get();
-				this.jsonParkingString = this.jsonParkingTask.get();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} catch (ExecutionException e) {
-				e.printStackTrace();
+		if(this.isOnline()){
+			setContentView(R.layout.list);
+			
+			this.locationParser = new JsonLocationParser();
+			this.parkingParser = new JsonParkingParser();
+			this.listener = new AsyncTaskListener(this.getBaseContext(), this.locationParser, this.parkingParser);
+			
+			this.jsonLocationTask = new JsonDownloadTask(this.listener);
+			this.jsonParkingTask = new JsonDownloadTask(this.listener);
+			if(!this.jsonLocationTask.isHasBeenExecuted() && !jsonParkingTask.isHasBeenExecuted()){
+				this.jsonLocationTask.execute(new String[]{getString(R.string.urlLocation)});
+				this.jsonParkingTask.execute(new String[]{getString(R.string.urlParking)});
+			
+				try {
+					this.jsonLocationString = this.jsonLocationTask.get();
+					this.jsonParkingString = this.jsonParkingTask.get();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				} catch (ExecutionException e) {
+					e.printStackTrace();
+				}
 			}
+		} else {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage(R.string.dialog_internet_unavailable)
+			       .setTitle(R.string.app_name)
+			       .setPositiveButton(android.R.string.ok, new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						finish();
+					}
+				});
+
+			AlertDialog dialog = builder.create();
+			dialog.show();
+			dialog.setOnDismissListener(new OnDismissListener() {
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+					finish();
+				}
+			});
 		}
+		
 	}
 
 	@Override
@@ -76,7 +106,12 @@ public class ParkingListActivity extends Activity{
 		}
 	}
 
-
+	public boolean isOnline() {
+	    ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+	    return netInfo != null && netInfo.isConnectedOrConnecting();
+	}
+	
 	public class AsyncTaskListener{
 		private HashMap<AsyncTask<String, Void, String>, Boolean> tasks;
 		private JsonLocationParser locationParser;

@@ -45,8 +45,9 @@ public class AlarmProgrammingHandler extends Handler{
 			int random = (int)(Math.random() * 10) + 9;
 			PendingIntent pendingIntent;
 			
+			Intent alarmIntent = new Intent(this.baseContext, AlarmReceiver.class);
+			alarmIntent.setAction("alarmProgrammation");
 			if(infos.isRecurrent()){
-				Intent alarmIntent = new Intent(this.baseContext, AlarmReceiver.class);
 				alarmIntent.putExtra("day", infos.getReccurencyDay());
 				Log.d("SIMPLE_ALARM", "Handler program day to> " + String.valueOf(infos.getReccurencyDay()));
 				
@@ -56,7 +57,6 @@ public class AlarmProgrammingHandler extends Handler{
 				Log.d("SIMPLE_ALARM", "Programmed repeating alarm to> " + infos.getHour() + ":" + infos.getMinutes());
 				
 			} else {
-				Intent alarmIntent = new Intent(this.baseContext, AlarmReceiver.class);
 				alarmIntent.putExtra("day", 0);
 				pendingIntent = PendingIntent.getBroadcast(this.baseContext, random, alarmIntent, PendingIntent.FLAG_ONE_SHOT);
 				this.am.set(AlarmManager.RTC_WAKEUP, this.calendar.getTimeInMillis(), pendingIntent);

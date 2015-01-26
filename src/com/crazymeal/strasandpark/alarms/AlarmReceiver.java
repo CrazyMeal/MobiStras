@@ -10,6 +10,7 @@ import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.crazymeal.mobistras.R;
@@ -19,9 +20,18 @@ import com.crazymeal.strasandpark.model.Parking;
 import com.crazymeal.strasandpark.parsers.JsonParkingParser;
 
 public class AlarmReceiver extends BroadcastReceiver {
-
 	@Override
 	public void onReceive(Context context, Intent intent) {
+		if(intent.getAction().equals("alarmProgrammation")){
+			this.handleAlarm(context, intent);
+		}
+		if(intent.getAction().equals("android.intent.action.BOOT_COMPLETED")){
+			Log.d("ALARM_REPROG", "Device just booted");
+			SharedPreferences myPrefs = context.getSharedPreferences(context.getString(R.string.alarm_preferences_name), context.MODE_PRIVATE);
+		}
+		
+	}
+	private void handleAlarm(Context context, Intent intent){
 		Log.d("SIMPLE_ALARM", "JE SONNE");
 		int day = intent.getIntExtra("day", -1);
 		if(day != -1){
@@ -69,9 +79,8 @@ public class AlarmReceiver extends BroadcastReceiver {
 				this.buildNotification(sb.toString(), context);
 			} else
 				Log.d("SIMPLE_ALARM", "Not today");
-		}	
+		}
 	}
-
 	private void buildNotification(String parkingText, Context context) {
 		Notification.Builder mBuilder = new Notification.Builder(context)
 		        .setSmallIcon(android.R.drawable.ic_dialog_info)
