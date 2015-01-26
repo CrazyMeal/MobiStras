@@ -1,4 +1,4 @@
-package com.crazymeal.mobistras;
+package com.crazymeal.strasandpark;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
-import com.crazymeal.mobistras.model.Parking;
+import com.crazymeal.strasandpark.model.Parking;
 
 public class CustomClickListener implements OnClickListener{
 	private Parking parking;

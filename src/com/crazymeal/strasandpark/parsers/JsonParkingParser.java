@@ -1,4 +1,4 @@
-package com.crazymeal.mobistras.parsers;
+package com.crazymeal.strasandpark.parsers;
 
 import java.util.HashMap;
 
@@ -9,7 +9,7 @@ import org.json.simple.parser.ParseException;
 
 import android.annotation.SuppressLint;
 
-import com.crazymeal.mobistras.model.Parking;
+import com.crazymeal.strasandpark.model.Parking;
 
 @SuppressLint("UseSparseArrays")
 public class JsonParkingParser extends JsonParser{

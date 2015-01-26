@@ -1,4 +1,4 @@
-package com.crazymeal.mobistras;
+package com.crazymeal.strasandpark;
 
 import java.util.ArrayList;
 
@@ -13,11 +13,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.crazymeal.mobistras.model.Parking;
-import com.crazymeal.mobistras.model.Status;
+import com.crazymeal.mobistras.R;
+import com.crazymeal.strasandpark.model.Parking;
+import com.crazymeal.strasandpark.model.Status;
 
-public class ParkingMapAdapter extends ArrayAdapter<com.crazymeal.mobistras.model.Parking>{
-	private ArrayList<com.crazymeal.mobistras.model.Parking> parkingList;
+public class ParkingMapAdapter extends ArrayAdapter<com.crazymeal.strasandpark.model.Parking>{
+	private ArrayList<com.crazymeal.strasandpark.model.Parking> parkingList;
 	private Resources resources;
 	private ViewHolderItem viewHolder;
 	
@@ -28,7 +29,7 @@ public class ParkingMapAdapter extends ArrayAdapter<com.crazymeal.mobistras.mode
 	    ImageView favoriteLogo;
 	}
 	
-	public ParkingMapAdapter(Context context, Resources resources, int textViewRessourceId, ArrayList<com.crazymeal.mobistras.model.Parking> parkingList){
+	public ParkingMapAdapter(Context context, Resources resources, int textViewRessourceId, ArrayList<com.crazymeal.strasandpark.model.Parking> parkingList){
 		super(context, textViewRessourceId, parkingList);
 		this.parkingList = parkingList;
 		this.resources = resources;

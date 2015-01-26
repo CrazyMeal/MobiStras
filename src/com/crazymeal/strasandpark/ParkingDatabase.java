@@ -1,4 +1,4 @@
-package com.crazymeal.mobistras;
+package com.crazymeal.strasandpark;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.crazymeal.mobistras.model.Parking;
+import com.crazymeal.strasandpark.model.Parking;
 
 public class ParkingDatabase extends SQLiteOpenHelper{
 	public static final int DATABASE_VERSION = 1;

@@ -1,4 +1,4 @@
-package com.crazymeal.mobistras.activities;
+package com.crazymeal.strasandpark.activities;
 
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
@@ -13,14 +13,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-import com.crazymeal.mobistras.ParkingDatabase;
-import com.crazymeal.mobistras.ParkingMapAdapter;
 import com.crazymeal.mobistras.R;
-import com.crazymeal.mobistras.asynctasks.JsonDownloadTask;
-import com.crazymeal.mobistras.model.Parking;
-import com.crazymeal.mobistras.parsers.JsonLocationParser;
-import com.crazymeal.mobistras.parsers.JsonParkingParser;
-import com.crazymeal.mobistras.util.Util;
+import com.crazymeal.strasandpark.ParkingDatabase;
+import com.crazymeal.strasandpark.ParkingMapAdapter;
+import com.crazymeal.strasandpark.asynctasks.JsonDownloadTask;
+import com.crazymeal.strasandpark.model.Parking;
+import com.crazymeal.strasandpark.parsers.JsonLocationParser;
+import com.crazymeal.strasandpark.parsers.JsonParkingParser;
+import com.crazymeal.strasandpark.util.Util;
 
 public class ParkingListActivity extends Activity{
 	private ParkingMapAdapter adapter;

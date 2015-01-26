@@ -1,4 +1,4 @@
-package com.crazymeal.mobistras.alarms;
+package com.crazymeal.strasandpark.alarms;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -12,11 +12,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.crazymeal.mobistras.ParkingDatabase;
 import com.crazymeal.mobistras.R;
-import com.crazymeal.mobistras.asynctasks.JsonDownloadTask;
-import com.crazymeal.mobistras.model.Parking;
-import com.crazymeal.mobistras.parsers.JsonParkingParser;
+import com.crazymeal.strasandpark.ParkingDatabase;
+import com.crazymeal.strasandpark.asynctasks.JsonDownloadTask;
+import com.crazymeal.strasandpark.model.Parking;
+import com.crazymeal.strasandpark.parsers.JsonParkingParser;
 
 public class AlarmReceiver extends BroadcastReceiver {
 

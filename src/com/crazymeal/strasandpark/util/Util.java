@@ -1,4 +1,4 @@
-package com.crazymeal.mobistras.util;
+package com.crazymeal.strasandpark.util;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -7,7 +7,7 @@ import org.json.simple.JSONArray;
 
 import android.annotation.SuppressLint;
 
-import com.crazymeal.mobistras.model.Parking;
+import com.crazymeal.strasandpark.model.Parking;
 
 @SuppressLint("UseSparseArrays")
 public class Util {

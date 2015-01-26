@@ -18,7 +18,7 @@
         android:theme="@style/AppTheme" >
 
         <activity
-            android:name=".activities.ParkingListActivity"
+            android:name="com.crazymeal.strasandpark.activities.ParkingListActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,14 +27,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.AlarmProgrammingActivity"
-            android:parentActivityName=".activities.ParkingListActivity" >
+            android:name="com.crazymeal.strasandpark.activities.AlarmProgrammingActivity"
+            android:parentActivityName="com.crazymeal.strasandpark.activities.ParkingListActivity" >
             >
         </activity>
 
-        <service android:name=".alarms.AlarmService" />
+        <service android:name="com.crazymeal.strasandpark.alarms.AlarmService" />
 
-        <receiver android:name=".alarms.AlarmReceiver" >
+        <receiver android:name="com.crazymeal.strasandpark.alarms.AlarmReceiver" >
         </receiver>
 
     </application>

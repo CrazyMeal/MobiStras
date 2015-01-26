@@ -1,4 +1,4 @@
-package com.crazymeal.mobistras.alarms;
+package com.crazymeal.strasandpark.alarms;
 
 import java.util.Calendar;
 

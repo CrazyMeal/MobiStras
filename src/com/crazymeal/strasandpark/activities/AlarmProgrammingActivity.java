@@ -1,4 +1,4 @@
-package com.crazymeal.mobistras.activities;
+package com.crazymeal.strasandpark.activities;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -21,8 +21,8 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import com.crazymeal.mobistras.R;
-import com.crazymeal.mobistras.alarms.AlarmInfos;
-import com.crazymeal.mobistras.alarms.AlarmService;
+import com.crazymeal.strasandpark.alarms.AlarmInfos;
+import com.crazymeal.strasandpark.alarms.AlarmService;
 
 public class AlarmProgrammingActivity extends Activity{
 	private Button validateButton;
