@@ -28,12 +28,10 @@ public final class R {
         public static final int layout_time=0x7f080007;
         public static final int listview_database=0x7f080000;
         public static final int listviewperso=0x7f08000b;
-        public static final int menu_settings=0x7f080013;
+        public static final int menu_settings=0x7f080011;
         public static final int spinner_recurrence=0x7f080006;
-        public static final int splash=0x7f080011;
         public static final int textView1=0x7f08000e;
         public static final int textView2=0x7f080001;
-        public static final int textViewSplashScreen=0x7f080012;
         public static final int textView_available_places=0x7f08000f;
         public static final int textView_parking_name=0x7f08000d;
         public static final int text_view_recurrence=0x7f080005;
@@ -42,11 +40,9 @@ public final class R {
     }
     public static final class layout {
         public static final int activity_database=0x7f030000;
-        public static final int activity_notification_landing=0x7f030001;
-        public static final int activity_parking_alarm=0x7f030002;
-        public static final int list=0x7f030003;
-        public static final int new_list_item_display=0x7f030004;
-        public static final int splash=0x7f030005;
+        public static final int activity_parking_alarm=0x7f030001;
+        public static final int list=0x7f030002;
+        public static final int new_list_item_display=0x7f030003;
     }
     public static final class menu {
         public static final int activity_parking_list=0x7f070000;

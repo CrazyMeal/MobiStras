@@ -17,15 +17,6 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
 
-        <!--
-        <activity android:name=".SplashActivity"
-        android:theme="@android:style/Theme.NoTitleBar">
-	        <intent-filter>
-	            <action android:name="android.intent.action.MAIN" />
-	            <category android:name="android.intent.category.LAUNCHER" />
-	        </intent-filter>
-    	</activity>
-        -->
         <activity
             android:name=".activities.ParkingListActivity"
             android:label="@string/app_name" >
@@ -46,14 +37,6 @@
         <receiver android:name=".alarms.AlarmReceiver" >
         </receiver>
 
-        <activity
-            android:name=".activities.NotificationLandingActivity"
-            android:parentActivityName=".activities.ParkingListActivity">
-            <meta-data
-		        android:name="android.support.PARENT_ACTIVITY"
-		        android:value=".activities.ParkingListActivity"/>
-            
-        </activity>
     </application>
 
 </manifest>
