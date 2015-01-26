@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">MobiStras</string>
     <string name="menu_settings">Gérer la programmation</string>
     <string name="text_button_preferences">Préférences</string>
@@ -18,4 +20,7 @@
     <string name="text_detailed_alarms">Alarme programmée:</string>
     <string name="text_detailed_isreccurent">Alarme récurrente</string>
     <string name="content_description_favorite">favorite_logo</string>
+    <string name="title_activity_notification_landing">NotificationLandingActivity</string>
+    <string name="hello_world">Hello world!</string>
+
 </resources>

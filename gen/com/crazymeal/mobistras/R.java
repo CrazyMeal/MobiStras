@@ -42,10 +42,11 @@ public final class R {
     }
     public static final class layout {
         public static final int activity_database=0x7f030000;
-        public static final int activity_parking_alarm=0x7f030001;
-        public static final int list=0x7f030002;
-        public static final int new_list_item_display=0x7f030003;
-        public static final int splash=0x7f030004;
+        public static final int activity_notification_landing=0x7f030001;
+        public static final int activity_parking_alarm=0x7f030002;
+        public static final int list=0x7f030003;
+        public static final int new_list_item_display=0x7f030004;
+        public static final int splash=0x7f030005;
     }
     public static final class menu {
         public static final int activity_parking_list=0x7f070000;
@@ -56,6 +57,7 @@ public final class R {
         public static final int content_description_logo_map=0x7f05000e;
         public static final int content_description_parking_logo=0x7f05000d;
         public static final int description_image_parking_open=0x7f050003;
+        public static final int hello_world=0x7f050014;
         public static final int menu_settings=0x7f050001;
         public static final int text_alarm_infos=0x7f050009;
         public static final int text_available_places=0x7f05000a;
@@ -68,6 +70,7 @@ public final class R {
         public static final int text_programmed_alarms=0x7f05000f;
         public static final int text_recurrence=0x7f050006;
         public static final int text_time=0x7f050007;
+        public static final int title_activity_notification_landing=0x7f050013;
         public static final int urlLocation=0x7f050004;
         public static final int urlParking=0x7f050005;
     }

@@ -101,7 +101,7 @@ public class ParkingDatabase extends SQLiteOpenHelper{
 		return all;
 
 	}
-	public ArrayList<Integer> getAllFavorites() {
+	public HashMap<Integer, String> getAllFavorites() {
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor c = db.rawQuery ("SELECT * FROM " + 	TABLE_NAME + " WHERE " + PARKING_FAVORITE + " = ?" , new String[]{"1"});
 		if (c == null) {
@@ -109,16 +109,12 @@ public class ParkingDatabase extends SQLiteOpenHelper{
 		   return null;
 		}
 		c.moveToFirst();
-		ArrayList<Parking> all = new ArrayList<Parking> ();
+		HashMap<Integer, String> all = new HashMap<Integer, String>();
 		while (! c.isAfterLast()) {
-		    all.add(new Parking(c));
+		    all.put(c.getInt(1), c.getString(2));
 		    c.moveToNext();
 		}
-		ArrayList<Integer> ids = new ArrayList<Integer>();
-		for(Parking p : all){
-			ids.add(p.getId());
-		}
-		return ids;
+		return all;
 
 	}
 	
