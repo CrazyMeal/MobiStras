@@ -34,7 +34,9 @@
 
         <service android:name="com.crazymeal.strasandpark.alarms.AlarmService" />
 
-        <receiver android:name="com.crazymeal.strasandpark.alarms.AlarmReceiver" >
+        <receiver 
+            android:name="com.crazymeal.strasandpark.alarms.AlarmReceiver" 
+            android:enabled="true">
         </receiver>
 
     </application>

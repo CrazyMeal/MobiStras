@@ -15,5 +15,6 @@
     <string name="description_image_parking_open">Image parking ouvert</string>
     <string name="text_detailed_isreccurent">Alarme récurrente</string>
     <string name="content_description_favorite">favorite_logo</string>
+    <string name="text_button_cancel_alarm">Désactiver la vérification</string>
 
 </resources>

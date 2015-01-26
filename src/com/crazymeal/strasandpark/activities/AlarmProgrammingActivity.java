@@ -25,7 +25,6 @@ import com.crazymeal.strasandpark.alarms.AlarmInfos;
 import com.crazymeal.strasandpark.alarms.AlarmService;
 
 public class AlarmProgrammingActivity extends Activity{
-	private Button validateButton;
 	private TimePicker timePicker;
 	private Spinner spinner;
 	private CheckBox isRecurrentCheckbox;
@@ -39,12 +38,29 @@ public class AlarmProgrammingActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_parking_alarm);
 		
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.recurrence_array, android.R.layout.simple_spinner_item);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		this.spinner = (Spinner) findViewById(R.id.spinner_recurrence);
+		this.spinner.setAdapter(adapter);
 		
 		this.timePicker = (TimePicker)findViewById(R.id.timePicker);
 		
-		this.validateButton = (Button)findViewById(R.id.button_validate_alarm);
-		this.validateButton.setOnClickListener(new OnClickListener() {	
+		((Button)findViewById(R.id.button_cancel_alarm)).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				try {
+					Message message = Message.obtain();
+					message.arg1 = 0;
+					serviceMessenger.send(message);
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				} finally {
+					finish();
+				}
+			}
+		});
+		
+		((Button)findViewById(R.id.button_validate_alarm)).setOnClickListener(new OnClickListener() {	
 			@Override
 			public void onClick(View v) {
 				try {
@@ -53,6 +69,7 @@ public class AlarmProgrammingActivity extends Activity{
 					if(isRecurrentCheckbox.isChecked()){
 						infos.setReccurencyDay((int) spinner.getSelectedItemId());
 					}
+					message.arg1 = 1;
 					message.obj = infos;
 					serviceMessenger.send(message);
 				} catch (RemoteException e) {
@@ -85,15 +102,15 @@ public class AlarmProgrammingActivity extends Activity{
 				serviceBinded = false;
 			}
 		};
+		
+		
 	}
 	
 	@Override
 	protected void onStart() {
 		super.onStart();
 		
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.recurrence_array, android.R.layout.simple_spinner_item);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		this.spinner.setAdapter(adapter);
+		
 		
 		bindService(new Intent(this, AlarmService.class), mConnection, Context.BIND_AUTO_CREATE);
 	}

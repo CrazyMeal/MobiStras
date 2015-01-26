@@ -67,6 +67,13 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/button_cancel_alarm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/text_button_cancel_alarm" />
+
+    <Button
         android:id="@+id/button_validate_alarm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
