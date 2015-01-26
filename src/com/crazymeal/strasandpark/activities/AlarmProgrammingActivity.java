@@ -20,7 +20,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
-import com.crazymeal.mobistras.R;
+import com.crazymeal.strasandpark.R;
 import com.crazymeal.strasandpark.alarms.AlarmInfos;
 import com.crazymeal.strasandpark.alarms.AlarmService;
 

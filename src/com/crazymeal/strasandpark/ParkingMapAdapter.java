@@ -13,7 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.crazymeal.mobistras.R;
+import com.crazymeal.strasandpark.R;
 import com.crazymeal.strasandpark.model.Parking;
 import com.crazymeal.strasandpark.model.Status;
 

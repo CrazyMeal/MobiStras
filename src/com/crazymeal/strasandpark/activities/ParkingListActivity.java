@@ -14,13 +14,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-import com.crazymeal.mobistras.R;
+import com.crazymeal.strasandpark.R;
 import com.crazymeal.strasandpark.ParkingDatabase;
 import com.crazymeal.strasandpark.ParkingMapAdapter;
 import com.crazymeal.strasandpark.asynctasks.JsonDownloadTask;

@@ -2,11 +2,15 @@ package com.crazymeal.strasandpark.alarms;
 
 import java.util.Calendar;
 
+import com.crazymeal.strasandpark.R;
+
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Message;
@@ -42,8 +46,17 @@ public class AlarmProgrammingHandler extends Handler{
 			this.calendar.set(Calendar.MINUTE, infos.getMinutes());
 			this.calendar.set(Calendar.SECOND, 0);
 			
+			SharedPreferences myPrefs = this.baseContext.getSharedPreferences(this.baseContext.getString(R.string.alarm_preferences_name), this.baseContext.MODE_PRIVATE);
+			Editor prefEditor = myPrefs.edit();
+			prefEditor.putInt("programmed_hour", infos.getHour());
+			prefEditor.putInt("programmed_minute", infos.getMinutes());
+			if(infos.isRecurrent()){
+				prefEditor.putBoolean("programmed_recurrent", infos.isRecurrent());
+				prefEditor.putInt("programmed_day", infos.getReccurencyDay());
+			}
+			prefEditor.commit();
+			
 			int random = (int)(Math.random() * 10) + 9;
-			PendingIntent pendingIntent;
 			
 			Intent alarmIntent = new Intent(this.baseContext, AlarmReceiver.class);
 			alarmIntent.setAction("alarmProgrammation");
@@ -51,14 +64,14 @@ public class AlarmProgrammingHandler extends Handler{
 				alarmIntent.putExtra("day", infos.getReccurencyDay());
 				Log.d("SIMPLE_ALARM", "Handler program day to> " + String.valueOf(infos.getReccurencyDay()));
 				
-				pendingIntent = PendingIntent.getBroadcast(this.baseContext, 0, alarmIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+				PendingIntent pendingIntent = PendingIntent.getBroadcast(this.baseContext, 0, alarmIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 				this.am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 60 * 24, pendingIntent);
 				
 				Log.d("SIMPLE_ALARM", "Programmed repeating alarm to> " + infos.getHour() + ":" + infos.getMinutes());
 				
 			} else {
 				alarmIntent.putExtra("day", 0);
-				pendingIntent = PendingIntent.getBroadcast(this.baseContext, random, alarmIntent, PendingIntent.FLAG_ONE_SHOT);
+				PendingIntent pendingIntent = PendingIntent.getBroadcast(this.baseContext, random, alarmIntent, PendingIntent.FLAG_ONE_SHOT);
 				this.am.set(AlarmManager.RTC_WAKEUP, this.calendar.getTimeInMillis(), pendingIntent);
 				
 				Log.d("SIMPLE_ALARM", "Programmed one shot alarm to> "  + infos.getHour() + ":" + infos.getMinutes());
