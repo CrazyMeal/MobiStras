@@ -104,20 +104,22 @@ public class Parking {
 	}
 	
 	private String getStringStatus(){
-		String stringStatus = "";
-		switch(this.status){
-		case OPEN:
-			stringStatus = "status_1";
-			break;
-		case FULL:
-			stringStatus = "status_2";
-			break;
-		case UNAVAIBLE:
-			stringStatus = "status_3";
-			break;
-		case CLOSE:
-			stringStatus = "status_4";
-			break;
+		String stringStatus = "status_4";
+		if(this.status != null){
+			switch(this.status){
+			case OPEN:
+				stringStatus = "status_1";
+				break;
+			case FULL:
+				stringStatus = "status_2";
+				break;
+			case UNAVAIBLE:
+				stringStatus = "status_3";
+				break;
+			case CLOSE:
+				stringStatus = "status_4";
+				break;
+			}
 		}
 		return stringStatus;
 	}

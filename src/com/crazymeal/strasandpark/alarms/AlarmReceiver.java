@@ -48,7 +48,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 		if(intent.getAction().equals("android.intent.action.BOOT_COMPLETED")){
 			Log.d("ALARM_REPROG", "Device just booted");
 			
-			SharedPreferences myPrefs = context.getSharedPreferences(context.getString(R.string.alarm_preferences_name), context.MODE_PRIVATE);
+			SharedPreferences myPrefs = context.getSharedPreferences(context.getString(R.string.alarm_preferences_name), Context.MODE_PRIVATE);
 			int hour = myPrefs.getInt("programmed_hour", -1);
 			int minute = myPrefs.getInt("programmed_minute", -1);
 			boolean isRecurrent = myPrefs.getBoolean("programmed_recurrent", false);

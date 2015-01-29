@@ -46,7 +46,7 @@ public class AlarmProgrammingHandler extends Handler{
 			this.calendar.set(Calendar.MINUTE, infos.getMinutes());
 			this.calendar.set(Calendar.SECOND, 0);
 			
-			SharedPreferences myPrefs = this.baseContext.getSharedPreferences(this.baseContext.getString(R.string.alarm_preferences_name), this.baseContext.MODE_PRIVATE);
+			SharedPreferences myPrefs = this.baseContext.getSharedPreferences(this.baseContext.getString(R.string.alarm_preferences_name), Context.MODE_PRIVATE);
 			Editor prefEditor = myPrefs.edit();
 			prefEditor.putInt("programmed_hour", infos.getHour());
 			prefEditor.putInt("programmed_minute", infos.getMinutes());
