@@ -7,15 +7,20 @@
 
     <ImageView
         android:id="@+id/imageView_parking_logo"
-        android:layout_width="56dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_weight="0"
+        android:padding="10dp"
         android:contentDescription="@string/content_description_parking_logo"
         android:scaleType="center"
         android:src="@drawable/parking_open" />
 
     <LinearLayout
-        android:layout_width="213dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         android:orientation="vertical" >
 
         <TextView
@@ -45,8 +50,10 @@
 
     <ImageView
         android:id="@+id/imageView_favorite"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_weight="0"
+        android:padding="10dp"
         android:contentDescription="@string/content_description_favorite"
         android:scaleType="center"
         android:src="@android:drawable/star_big_off" />
