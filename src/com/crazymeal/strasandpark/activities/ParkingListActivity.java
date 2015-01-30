@@ -43,8 +43,11 @@ public class ParkingListActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list);
+		
+		this.listView = (ListView) findViewById(R.id.listviewperso);
+		
 		if(this.isOnline()){
-
+			
 			this.locationParser = new JsonLocationParser();
 			this.parkingParser = new JsonParkingParser();
 			this.listener = new AsyncTaskListener(this.getBaseContext(), this.locationParser, this.parkingParser);
@@ -65,6 +68,7 @@ public class ParkingListActivity extends Activity{
 				}
 			}
 		} else {
+
 			this.internetLayout = (LinearLayout) findViewById(R.id.layout_internet_unavailable);
 			this.internetLayout.setVisibility(View.VISIBLE);
 			ImageView view = (ImageView) findViewById(R.id.imageView_delete_banner);
@@ -78,7 +82,7 @@ public class ParkingListActivity extends Activity{
 				}
 			});
 			ParkingDatabase db = new ParkingDatabase(this);
-			listView = (ListView) findViewById(R.id.listviewperso);
+			
 			adapter = new ParkingMapAdapter(this,getResources(), R.layout.new_list_item_display, db.getAllAsList());
 			listView.setAdapter(adapter);
 			listView.setVisibility(View.VISIBLE);
