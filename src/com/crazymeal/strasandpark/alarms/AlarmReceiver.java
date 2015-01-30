@@ -46,33 +46,14 @@ public class AlarmReceiver extends BroadcastReceiver {
 			this.handleAlarm(context, intent);
 		}
 		if(intent.getAction().equals("android.intent.action.BOOT_COMPLETED")){
+			//context.bindService(new Intent(context, AlarmService.class), mConnection, Context.BIND_AUTO_CREATE);
 			Log.d("ALARM_REPROG", "Device just booted");
+			Intent serviceIntent = new Intent(context,AlarmService.class);
+			serviceIntent.setAction("reprogAlarms");
+			context.startService(serviceIntent);
 			
-			SharedPreferences myPrefs = context.getSharedPreferences(context.getString(R.string.alarm_preferences_name), Context.MODE_PRIVATE);
-			int hour = myPrefs.getInt("programmed_hour", -1);
-			int minute = myPrefs.getInt("programmed_minute", -1);
-			boolean isRecurrent = myPrefs.getBoolean("programmed_recurrent", false);
 			
-			if(hour != -1 && minute != -1){
-				context.bindService(new Intent(context, AlarmService.class), mConnection, Context.BIND_AUTO_CREATE);
-				
-				try {
-					Message message = Message.obtain();
-					AlarmInfos infos = new AlarmInfos(hour, minute, isRecurrent);
-					if(isRecurrent){
-						infos.setReccurencyDay((int) myPrefs.getInt("programmed_day", 0));
-					}
-					message.arg1 = 1;
-					message.obj = infos;
-					serviceMessenger.send(message);
-					
-					Log.d("ALARM_REPROG", "Sended reprograming message to service");
-				} catch (RemoteException e) {
-					e.printStackTrace();
-				} finally {
-					context.unbindService(mConnection);
-				}
-			}
+			
 		}
 		
 	}

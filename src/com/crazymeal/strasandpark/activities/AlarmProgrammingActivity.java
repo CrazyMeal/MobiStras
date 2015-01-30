@@ -109,9 +109,6 @@ public class AlarmProgrammingActivity extends Activity{
 	@Override
 	protected void onStart() {
 		super.onStart();
-		
-		
-		
 		bindService(new Intent(this, AlarmService.class), mConnection, Context.BIND_AUTO_CREATE);
 	}
 	

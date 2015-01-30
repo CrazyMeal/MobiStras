@@ -54,7 +54,7 @@ public class Parking {
 			return this.status = Status.OPEN;
 		if(status.equals("status_2"))
 			return this.status = Status.FULL;
-		if(status.equals("status_3"))
+		if(status.equals("status_3") || status.equals("status_0"))
 			return this.status = Status.UNAVAIBLE;
 		if(status.equals("status_4"))
 			return this.status = Status.CLOSE;
@@ -87,7 +87,6 @@ public class Parking {
 		cv.put("name",this.name);
 		cv.put("avaible",this.avaiblePlaces);
 		cv.put("full",this.fullPlaces);
-		cv.put("status",this.getStringStatus());
 		cv.put("longitude",this.longitude);
 		cv.put("latitude",this.latitude);
 		return cv;
@@ -104,7 +103,7 @@ public class Parking {
 	}
 	
 	private String getStringStatus(){
-		String stringStatus = "status_4";
+		String stringStatus = "status_3";
 		if(this.status != null){
 			switch(this.status){
 			case OPEN:

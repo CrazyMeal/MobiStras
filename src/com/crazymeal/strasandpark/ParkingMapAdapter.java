@@ -60,7 +60,7 @@ public class ParkingMapAdapter extends ArrayAdapter<com.crazymeal.strasandpark.m
 			viewHolder.parkingNameView.setText(parking.getName());
 			viewHolder.avaiblePlacesView.setText(String.valueOf(parking.getAvaiblePlaces()+" / "+parking.getFullPlaces()));
 			
-			if(parking.getStatus() == Status.CLOSE || parking.getStatus() == Status.FULL)
+			if(parking.getStatus() == Status.CLOSE || parking.getStatus() == Status.FULL || parking.getStatus() == Status.UNAVAIBLE)
 				viewHolder.parkingLogo.setImageBitmap(BitmapFactory.decodeResource(this.resources, R.drawable.parking_close));
 			else
 				viewHolder.parkingLogo.setImageBitmap(BitmapFactory.decodeResource(this.resources, R.drawable.parking_open));
