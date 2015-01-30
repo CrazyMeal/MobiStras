@@ -5,6 +5,35 @@
     android:layout_height="fill_parent"
 
     >
+
+    <LinearLayout
+        android:id="@+id/layout_internet_unavailable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/textView_internet_available"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/text_internet_unavailable" />
+
+        <ImageView
+            android:id="@+id/imageView_delete_banner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/content_description_delete"
+            android:src="@android:drawable/ic_delete" />
+
+    </LinearLayout>
  
     <ListView
         android:id="@+id/listviewperso"

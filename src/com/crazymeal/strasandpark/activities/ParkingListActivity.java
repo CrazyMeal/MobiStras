@@ -4,11 +4,7 @@ import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -16,12 +12,16 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.crazymeal.strasandpark.R;
 import com.crazymeal.strasandpark.ParkingDatabase;
 import com.crazymeal.strasandpark.ParkingMapAdapter;
+import com.crazymeal.strasandpark.R;
 import com.crazymeal.strasandpark.asynctasks.JsonDownloadTask;
 import com.crazymeal.strasandpark.model.Parking;
 import com.crazymeal.strasandpark.parsers.JsonLocationParser;
@@ -31,20 +31,20 @@ import com.crazymeal.strasandpark.util.Util;
 public class ParkingListActivity extends Activity{
 	private ParkingMapAdapter adapter;
 	private ListView listView;
+	private LinearLayout internetLayout;
+	
 	private AsyncTaskListener listener;
 	private JsonLocationParser locationParser;
 	private JsonParkingParser parkingParser;
 	private JsonDownloadTask jsonLocationTask, jsonParkingTask;
 	private String jsonLocationString, jsonParkingString;
-	private boolean mBound;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		
+		setContentView(R.layout.list);
 		if(this.isOnline()){
-			setContentView(R.layout.list);
-			
+
 			this.locationParser = new JsonLocationParser();
 			this.parkingParser = new JsonParkingParser();
 			this.listener = new AsyncTaskListener(this.getBaseContext(), this.locationParser, this.parkingParser);
@@ -65,24 +65,24 @@ public class ParkingListActivity extends Activity{
 				}
 			}
 		} else {
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(R.string.dialog_internet_unavailable)
-			       .setTitle(R.string.app_name)
-			       .setPositiveButton(android.R.string.ok, new OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						finish();
-					}
-				});
-
-			AlertDialog dialog = builder.create();
-			dialog.show();
-			dialog.setOnDismissListener(new OnDismissListener() {
+			this.internetLayout = (LinearLayout) findViewById(R.id.layout_internet_unavailable);
+			this.internetLayout.setVisibility(View.VISIBLE);
+			ImageView view = (ImageView) findViewById(R.id.imageView_delete_banner);
+			view.setOnTouchListener(new OnTouchListener() {
+				
 				@Override
-				public void onDismiss(DialogInterface dialog) {
-					finish();
+				public boolean onTouch(View v, MotionEvent event) {
+					internetLayout.setVisibility(View.GONE);
+					v.performClick();
+					return false;
 				}
 			});
+			ParkingDatabase db = new ParkingDatabase(this);
+			listView = (ListView) findViewById(R.id.listviewperso);
+			adapter = new ParkingMapAdapter(this,getResources(), R.layout.new_list_item_display, db.getAllAsList());
+			listView.setAdapter(adapter);
+			listView.setVisibility(View.VISIBLE);
+			db.close();
 		}
 		
 	}
@@ -151,13 +151,5 @@ public class ParkingListActivity extends Activity{
 				listView.setVisibility(View.VISIBLE);
 			}
 		}	
-	}
-
-	public boolean ismBound() {
-		return mBound;
-	}
-
-	public void setmBound(boolean mBound) {
-		this.mBound = mBound;
 	}
 }

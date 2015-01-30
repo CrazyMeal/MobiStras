@@ -8,37 +8,19 @@ import java.util.concurrent.ExecutionException;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.IBinder;
-import android.os.Message;
-import android.os.Messenger;
-import android.os.RemoteException;
 import android.util.Log;
 
-import com.crazymeal.strasandpark.R;
 import com.crazymeal.strasandpark.ParkingDatabase;
+import com.crazymeal.strasandpark.R;
 import com.crazymeal.strasandpark.asynctasks.JsonDownloadTask;
 import com.crazymeal.strasandpark.model.Parking;
 import com.crazymeal.strasandpark.parsers.JsonParkingParser;
 
 public class AlarmReceiver extends BroadcastReceiver {
-	private Messenger serviceMessenger;
-	
-	final ServiceConnection mConnection = new ServiceConnection() {
-		public void onServiceConnected(ComponentName className, IBinder service) {
-			serviceMessenger = new Messenger(service);
-		}
-
-		public void onServiceDisconnected(ComponentName className) {
-			serviceMessenger = null;
-		}
-	};
 	
 	@Override
 	public void onReceive(Context context, Intent intent) {
@@ -46,14 +28,10 @@ public class AlarmReceiver extends BroadcastReceiver {
 			this.handleAlarm(context, intent);
 		}
 		if(intent.getAction().equals("android.intent.action.BOOT_COMPLETED")){
-			//context.bindService(new Intent(context, AlarmService.class), mConnection, Context.BIND_AUTO_CREATE);
 			Log.d("ALARM_REPROG", "Device just booted");
 			Intent serviceIntent = new Intent(context,AlarmService.class);
 			serviceIntent.setAction("reprogAlarms");
-			context.startService(serviceIntent);
-			
-			
-			
+			context.startService(serviceIntent);	
 		}
 		
 	}
