@@ -87,6 +87,7 @@ public class Parking {
 		cv.put("name",this.name);
 		cv.put("avaible",this.avaiblePlaces);
 		cv.put("full",this.fullPlaces);
+		cv.put("status",this.getStringStatus());
 		cv.put("longitude",this.longitude);
 		cv.put("latitude",this.latitude);
 		return cv;
