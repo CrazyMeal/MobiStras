@@ -10,16 +10,15 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-	
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
         <activity
-            android:name="com.crazymeal.strasandpark.activities.ParkingListActivity"
+            android:name=".activities.ParkingListActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,22 +27,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.crazymeal.strasandpark.activities.AlarmProgrammingActivity"
-            android:parentActivityName="com.crazymeal.strasandpark.activities.ParkingListActivity" >
-            >
+            android:name=".activities.AlarmProgrammingActivity"
+            android:parentActivityName=".activities.ParkingListActivity" >
+            
         </activity>
 
-        <service android:name="com.crazymeal.strasandpark.alarms.AlarmService" />
-
-        <receiver 
-            android:name="com.crazymeal.strasandpark.alarms.AlarmReceiver" 
-            android:enabled="true">
+        <service android:name=".alarms.AlarmService" />
+		<service android:name=".asynctasks.DownloadService" />
+		
+        <receiver
+            android:name=".alarms.AlarmReceiver"
+            android:enabled="true" >
             <intent-filter>
-		        <action android:name="android.intent.action.BOOT_COMPLETED"></action>
-		    </intent-filter>
-            
+                <action android:name="android.intent.action.BOOT_COMPLETED" >
+                </action>
+            </intent-filter>
         </receiver>
 
+        
     </application>
 
 </manifest>

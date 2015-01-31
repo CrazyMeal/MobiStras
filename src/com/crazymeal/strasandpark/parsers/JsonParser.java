@@ -15,6 +15,7 @@ import com.crazymeal.strasandpark.model.Parking;
 public abstract class JsonParser {
 	protected URL urlToParse;
 	protected StringBuffer extractedDatas;
+	protected String dataToParse;
 	
 	public abstract HashMap<Integer, Parking> parse(String stringToParse);
 	
@@ -47,5 +48,9 @@ public abstract class JsonParser {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void setDataToParse(String dataToParse){
+		this.dataToParse = dataToParse;
 	}
 }

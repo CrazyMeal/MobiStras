@@ -9,8 +9,6 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-import com.crazymeal.strasandpark.activities.ParkingListActivity.AsyncTaskListener;
-
 import android.os.AsyncTask;
 
 public class JsonDownloadTask extends AsyncTask<String,Void, String>{
