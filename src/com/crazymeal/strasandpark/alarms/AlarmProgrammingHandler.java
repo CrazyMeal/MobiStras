@@ -55,13 +55,13 @@ public class AlarmProgrammingHandler extends Handler{
 				prefEditor.putInt("programmed_day", infos.getReccurencyDay());
 			}
 			prefEditor.commit();
-			
 			int random = (int)(Math.random() * 10) + 9;
 			
 			Intent alarmIntent = new Intent(this.baseContext, AlarmReceiver.class);
 			alarmIntent.setAction("alarmProgrammation");
 			if(infos.isRecurrent()){
 				alarmIntent.putExtra("day", infos.getReccurencyDay());
+				alarmIntent.putExtra("reccurent", true);
 				Log.d("SIMPLE_ALARM", "Handler program day to> " + String.valueOf(infos.getReccurencyDay()));
 				
 				PendingIntent pendingIntent = PendingIntent.getBroadcast(this.baseContext, 0, alarmIntent, PendingIntent.FLAG_CANCEL_CURRENT);
@@ -71,6 +71,7 @@ public class AlarmProgrammingHandler extends Handler{
 				
 			} else {
 				alarmIntent.putExtra("day", 0);
+				alarmIntent.putExtra("reccurent", false);
 				PendingIntent pendingIntent = PendingIntent.getBroadcast(this.baseContext, random, alarmIntent, PendingIntent.FLAG_ONE_SHOT);
 				this.am.set(AlarmManager.RTC_WAKEUP, this.calendar.getTimeInMillis(), pendingIntent);
 				

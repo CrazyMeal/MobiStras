@@ -10,6 +10,8 @@ import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
@@ -45,6 +47,16 @@ public class AlarmReceiver extends BroadcastReceiver {
 			
 			if(day == androidDay || day == 0){
 				Log.d("SIMPLE_ALARM", "Today we ring> " + String.valueOf(day));
+				boolean alarmisReccurent = intent.getBooleanExtra("reccurent", false);
+				if(!alarmisReccurent){
+					SharedPreferences myPrefs = context.getSharedPreferences(context.getString(R.string.alarm_preferences_name), Context.MODE_PRIVATE);
+					Editor prefEditor = myPrefs.edit();
+					prefEditor.putInt("programmed_hour", -1);
+					prefEditor.putInt("programmed_minute", -1);
+					prefEditor.putBoolean("programmed_recurrent", false);
+					prefEditor.putInt("programmed_day", 0);
+					prefEditor.commit();
+				}
 				StringBuffer sb = new StringBuffer();
 				
 				if(this.isOnline(context)){

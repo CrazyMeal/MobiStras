@@ -1,8 +1,6 @@
 package com.crazymeal.strasandpark.alarms;
 
 
-import com.crazymeal.strasandpark.R;
-
 import android.app.AlarmManager;
 import android.app.Service;
 import android.content.Context;
@@ -13,6 +11,8 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 import android.util.Log;
+
+import com.crazymeal.strasandpark.R;
 
 public class AlarmService extends Service{
 	private Messenger mMessenger;
